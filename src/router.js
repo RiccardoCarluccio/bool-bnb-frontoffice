@@ -20,6 +20,13 @@ const routes = [                          //definizione rotte tramite array
       name: "about-us",
       component: AboutUs,
   },
+  {
+    path:"/login",
+    name:"login",
+    beforeEnter(to, from, next){
+      window.location.href = "http://127.0.0.1:8000/login";
+    }
+  }
 ]
 
 const router = createRouter({				      //creazione istanza di Router
