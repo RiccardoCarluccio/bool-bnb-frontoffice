@@ -17,11 +17,11 @@ export default {
     onFormSubmit() {
       axios.post("http://127.0.0.1:8000/api/contacts", this.formData)
       .then((resp) => {
-          this.succes = true;
+          this.succes = resp.data.message;
           this.errors = null;
       })
       .catch(e =>{
-         this.errors = e.message;
+         this.errors = e.response?.data.message ?? e.message;
       })
     },
   },
@@ -30,7 +30,8 @@ export default {
 
 <template>
   <div class="container" >
-    <div class="alert alert-danger" v-if="errors">Sembra che tu non abbia compilato tutti i campi: {{ errors }}</div>
+    <h1 class="text-center">Contatta il Proprietario del tuo appartamento</h1>
+    <div class="alert alert-danger" v-if="errors">{{ errors }}</div>
     <form @submit.prevent="onFormSubmit" v-if="!succes">
       <div class="mb-3">
         <label>Nome</label>
@@ -46,7 +47,7 @@ export default {
       </div>
       <button type="submit">Invia</button>
     </form>
-    <div class="alert alert-success" v-else>Grazie per averci contattato. Vi ricontatteremo il prima possibile</div>
+    <div class="alert alert-success" v-else>{{ this.succes }}</div>
   </div>
 </template>
 
