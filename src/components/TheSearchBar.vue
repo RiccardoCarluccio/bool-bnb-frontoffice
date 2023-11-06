@@ -41,10 +41,12 @@ export default {
         </form>
       </div>
     </nav>
-    <ul>
-      <li v-for="apartment in searchResults" :key="apartment.id">
-        {{ apartment.title }}
-      </li>
-    </ul>
+    <div class="card-deck">
+      <div v-for="apartment in searchResults" :key="apartment.id" class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ apartment.name }}</h5>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
