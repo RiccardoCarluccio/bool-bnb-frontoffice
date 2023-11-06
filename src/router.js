@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "./pages/Home.vue";
 import Contacts from "./pages/Contacts.vue";
 import AboutUs from "./pages/AboutUs.vue";
+import Apartments from "./pages/Apartments.vue";
 import ApartmentShowPage from "./pages/ApartmentShowPage.vue";
 
 const routes = [                          //definizione rotte tramite array
@@ -20,6 +21,12 @@ const routes = [                          //definizione rotte tramite array
       path: "/about-us",
       name: "about-us",
       component: AboutUs,
+  },
+  {
+ 
+    path: "/apartments",
+    name: "apartments",
+    component: Apartments
   },
   {
  
