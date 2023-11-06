@@ -43,9 +43,8 @@ const routes = [
 ];
 
 const router = createRouter({
-  //creazione istanza di Router
-  history: createWebHistory(), //gestione dell'url al cambio pagina
-  routes, //l'array viene passato alle rotte
+  history: createWebHistory(),
+  routes,
 });
 
-export { router }; //esportazione istanza router per poterla usare dentro main.js
+export { router };
