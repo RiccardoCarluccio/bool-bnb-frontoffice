@@ -1,6 +1,10 @@
 <script>
 export default {
-
+  // components: {
+  //   TheHeader,
+  //   TheFooter,
+   
+  // },
 };
 
 </script>
@@ -15,13 +19,18 @@ export default {
           <li><router-link :to="{ name: 'contacts' }">Contatti</router-link></li>
           <li><router-link :to="{ name: 'about-us' }">Su di noi</router-link></li>
           <li><router-link :to="{ name: 'login' }">Login</router-link></li>
+          <!-- <li><router-link :to="{ name:'apartments.show', params: { id: apartment.id }}">Singolo appartmaneto</router-link></li> -->
+
+
+
         </ul>
       </div>
     </nav>
   </header>
   <!-- <TheHeader></TheHeader> -->
   <main>
-
+   
+ 
     <RouterView></RouterView>
   </main>
 
