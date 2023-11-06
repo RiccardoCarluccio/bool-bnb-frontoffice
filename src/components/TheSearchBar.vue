@@ -11,7 +11,7 @@ export default {
     searchApartments() {
       // API REQUEST
       axios
-        .get("APIAPIAPIAPIAPI", {
+        .get("http://127.0.0.1:8000/api/apartments", {
           params: { query: this.searchQuery },
         })
         .then((response) => {
@@ -41,10 +41,12 @@ export default {
         </form>
       </div>
     </nav>
-    <ul>
-      <li v-for="apartment in searchResults" :key="apartment.id">
-        {{ apartment.title }}
-      </li>
-    </ul>
+    <div class="card-deck">
+      <div v-for="apartment in searchResults" :key="apartment.id" class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ apartment.name }}</h5>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
