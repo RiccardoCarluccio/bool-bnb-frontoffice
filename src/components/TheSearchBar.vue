@@ -1,4 +1,5 @@
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -10,7 +11,7 @@ export default {
     searchApartments() {
       // API REQUEST
       axios
-        .get("APIAPIAPIAPIAPI", {
+        .get("http://127.0.0.1:8000/api/apartments", {
           params: { query: this.searchQuery },
         })
         .then((response) => {
