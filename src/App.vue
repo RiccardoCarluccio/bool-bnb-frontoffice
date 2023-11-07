@@ -21,6 +21,7 @@ export default {
             <router-link :to="{ name: 'about-us' }">Su di noi</router-link>
           </li>
           <li><router-link :to="{ name: 'login' }">Login</router-link></li>
+          <li><router-link :to="{ name: 'Tom' }">tom</router-link></li>
           <!-- <li><router-link :to="{ name:'apartments.show', params: { id: apartment.id }}">Singolo appartmaneto</router-link></li> -->
 
 
