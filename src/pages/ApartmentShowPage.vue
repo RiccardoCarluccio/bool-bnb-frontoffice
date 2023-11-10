@@ -16,7 +16,10 @@ export default {
                 .then((resp) => {
                     this.apartment = resp.data;
                 })
-        }
+        },
+        getImgUrl(apartment) {
+            return `http://127.0.0.1:8000/storage/${apartment.images}`;
+        },
     },
     mounted() {
         this.data();
@@ -26,27 +29,34 @@ export default {
 
 <template>
     <div class="container">
-        <h1>{{ apartment.name }}</h1>
+        <div class="card">
+            <h1>{{ apartment.name }}</h1>
 
-        <!-- <img src="{{ $apartments->image_url }}" alt="{{ $apartments->name }}" style="max-width: 100%;"> -->
-        <p><strong>Description:</strong> {{ apartment.description }}</p>
-        <p><strong>Address:</strong> {{ apartment.address }}</p>
-        <div class="">
-            <p><strong>services:</strong></p>
+            <div class="carousel-inner">
+                <div class="card-image p-0 rounded-3 carousel-item active" :class="{ active: index === 0 }">
+                    <img :src="getImgUrl(apartment)" class="card-img-top p-2 d-block w-100"
+                        style="height: 300px; object-fit: contain;" alt="" />
+                </div>
+            </div>
+            <div class="card-body">
 
-            <div class="d-flex align-items-center" v-for="service in apartment.services">
-                <i class="">{{ service.icon }}</i>
-                <p>{{ service.name }}</p>
+                <p><strong>Description:</strong> {{ apartment.description }}</p>
+                <p><strong>Address:</strong> {{ apartment.address }}</p>
+                <p><strong>services:</strong></p>
+
+                <div class="d-flex align-items-center" v-for="service in apartment.services">
+                    <i class="">{{ service.icon }}</i>
+                    <p>{{ service.name }}</p>
+                </div>
+
             </div>
 
+            <p><strong>Rooms:</strong> {{ apartment.room }}</p>
+            <p><strong>Beds:</strong> {{ apartment.bed }}</p>
+
+            <TomTomMaps></TomTomMaps>
         </div>
-
-        <p><strong>Rooms:</strong> {{ apartment.room }}</p>
-        <p><strong>Beds:</strong> {{ apartment.bed }}</p>
     </div>
-
-    <TomTomMaps></TomTomMaps>
-
 </template>
 
 <style scoped lang="scss">
