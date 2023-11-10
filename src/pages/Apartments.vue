@@ -45,11 +45,6 @@ export default {
               <img :src="getImgUrl(apartment)" class="card-img-top p-2 d-block w-100" style="height: 300px; object-fit: contain;"
                 alt="" />
             </div>
-            <!-- <div v-for="(image, index) in apartment.images" :key="index" class="card-image p-0 rounded-3 carousel-item active"
-              :class="{ active: index === 0 }">
-              <img :src="apartment.images" class="card-img-top p-2 d-block w-100" style="height: 300px; object-fit: contain;"
-                alt="" />
-            </div> -->
           </div> 
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev">
