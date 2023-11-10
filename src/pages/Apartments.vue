@@ -26,12 +26,7 @@ export default {
      
   <div class="container" v-for="apartment in apartments" :key="apartment.id">
     <div class="row">
-      <div class="row cols d-flex justify-content-center">
-
-
-
-        <div class="col-3 p-2 m-3" style="border: .1px solid black">
-          
+        <div class="col p-2 m-3 justify-content-between" style="border: .1px solid black">
           <div class="card-image p-0 rounded-3">
             <img :src=" apartment.images" class="card-img-top rounded-0" alt="">
           </div>
@@ -47,8 +42,6 @@ export default {
           </div>
 
         </div>
-
-      </div>
     </div>
   </div>
 </template>
