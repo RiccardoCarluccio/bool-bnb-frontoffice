@@ -2,12 +2,21 @@
 import axios from "axios";
 export default {
   data() {
+    name: 'ApartmentShowPage';
+
+    props: {
+      apartment: {
+        type: Object
+        required: true
+      };
+    }
+
     return {
       formData: {
         name: "",
         email: "",
-        message: ""
-
+        message: "",
+        apartment_id: [],
       },
       errors: null,
       succes: null
@@ -16,20 +25,20 @@ export default {
   methods: {
     onFormSubmit() {
       axios.post("http://127.0.0.1:8000/api/contacts", this.formData)
-      .then((resp) => {
+        .then((resp) => {
           this.succes = resp.data.message;
           this.errors = null;
-      })
-      .catch(e =>{
-         this.errors = e.response?.data.message ?? e.message;
-      })
+        })
+        .catch(e => {
+          this.errors = e.response?.data.message ?? e.message;
+        })
     },
   },
 }
 </script>
 
 <template>
-  <div class="container" >
+  <div class="container">
     <h1 class="text-center">Contatta il Proprietario del tuo appartamento</h1>
     <div class="alert alert-danger" v-if="errors">{{ errors }}</div>
     <form @submit.prevent="onFormSubmit" v-if="!succes">

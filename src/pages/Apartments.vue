@@ -4,36 +4,26 @@ export default {
   data() {
     return {
       apartments: [],
-      searchQuery: "",
-      searchApartment: null,
     };
   },
-  computed: {
-    filteredApartments() {
-      if (!this.searchQuery) {
-        return this.apartments;
-      }
-      return this.apartments.filter((apartment) => {
-        return apartment.name
-          .toLowerCase()
-          .includes(this.searchQuery.toLowerCase());
-      });
-    },
-  },
   methods: {
-    loadData() {
-      axios.get("http://127.0.0.1:8000/api/apartments").then((resp) => {
-        this.apartments = resp.data;
-      });
-    },
+    data() {
+      axios.get("http://127.0.0.1:8000/api/apartments")
+        .then((resp) => {
+          this.apartments = resp.data;
+          console.log(resp);
+        })
+    }
+
   },
   mounted() {
-    this.loadData();
-  },
-};
+    this.data();
+  }
+}
 </script>
 
 <template>
+     
   <div class="container" v-for="apartment in apartments" :key="apartment.id">
     <div class="row">
       <div class="row cols d-flex justify-content-center">
@@ -41,6 +31,7 @@ export default {
 
 
         <div class="col-3 p-2 m-3" style="border: .1px solid black">
+          
           <div class="card-image p-0 rounded-3">
             <img src="" class="card-img-top rounded-0" alt="">
           </div>
@@ -51,6 +42,7 @@ export default {
               <span class="text-decoration-none p-2 text-center">{{ apartment.address }}</span>
               <span class="text-decoration-none p-2 text-center">{{ apartment.description }}</span>
               <span class="text-decoration-none p-2 text-center"></span>
+              <router-link :to="{ name:'apartments.show', params: { id: apartment.id }}">Singolo appartmaneto</router-link>
             </div>
           </div>
 

@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "./pages/Home.vue";
 import Contacts from "./pages/Contacts.vue";
 import AboutUs from "./pages/AboutUs.vue";
+import Apartments from "./pages/Apartments.vue";
 import ApartmentShowPage from "./pages/ApartmentShowPage.vue";
 import TheSearchBar from "./components/TheSearchBar.vue";
 
@@ -24,6 +25,13 @@ const routes = [
     component: AboutUs,
   },
   {
+ 
+    path: "/apartments",
+    name: "apartments",
+    component: Apartments
+  },
+  {
+ 
     path: "/apartments/:id",
     name: "apartments.show",
     component: ApartmentShowPage,
