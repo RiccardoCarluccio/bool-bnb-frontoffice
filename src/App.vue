@@ -9,7 +9,8 @@ export default {
 
 <template>
   <header>
-    <nav class="container">
+    <nav class="container ">
+      <img src="#" alt="LOGO">
       <div class="py-3 d-flex">
         <TheSearchBar></TheSearchBar>
         <ul class="ms-auto d-flex list-unstyled gap-3">
