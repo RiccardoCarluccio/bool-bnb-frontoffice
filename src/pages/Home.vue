@@ -2,6 +2,7 @@
 import axios from "axios";
 export default {
   data() {
+
     return {
       apartments: [],
       searchQuery: "",
@@ -26,6 +27,9 @@ export default {
         this.apartments = resp.data;
       });
     },
+    getImgUrl(apartment) {
+      return `http://127.0.0.1:8000/storage/${apartment.images}`;
+  },
   },
   mounted() {
     this.loadData();
@@ -51,7 +55,7 @@ export default {
           <div class="carousel-inner">
             <div class="card-image p-0 rounded-3 carousel-item active"
             :class="{ active: index === 0 }">
-              <img :src="apartment.images" class="card-img-top p-2 d-block w-100" style="height: 300px; object-fit: contain;"
+              <img :src="getImgUrl(apartment)" class="card-img-top p-2 d-block w-100" style="height: 300px; object-fit: contain;"
                 alt="" />
             </div>
             <!-- <div v-for="(image, index) in apartment.images" :key="index" class="card-image p-0 rounded-3 carousel-item active"
