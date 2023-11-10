@@ -33,7 +33,7 @@ export default {
         <div class="col-3 p-2 m-3" style="border: .1px solid black">
           
           <div class="card-image p-0 rounded-3">
-            <img src="" class="card-img-top rounded-0" alt="">
+            <img :src=" apartment.images" class="card-img-top rounded-0" alt="">
           </div>
           <div class="card-body h-50">
             <div class="row d-flex">
