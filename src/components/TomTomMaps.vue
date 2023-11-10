@@ -1,7 +1,7 @@
 <script>
 import axios from "axios";
-import tt from "@tomtom-international/web-sdk-maps";
-import "@tomtom-international/web-sdk-maps";
+// import tt from "@tomtom-international/web-sdk-maps";
+// import "@tomtom-international/web-sdk-maps";
 
 export default {
   data() {
