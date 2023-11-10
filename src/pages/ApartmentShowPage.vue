@@ -1,11 +1,12 @@
 <script>
 import axios from "axios";
-export default {
+import TomTomMaps from "../components/TomTomMaps.vue";
 
+export default {
     data() {
         return {
             apartment: {},
-
+            TomTomMaps,
         };
     },
     methods: {
@@ -13,12 +14,9 @@ export default {
             console.log(this.$route.params);
             axios.get("http://127.0.0.1:8000/api/apartments/" + this.$route.params.id)
                 .then((resp) => {
-
                     this.apartment = resp.data;
-
                 })
         }
-
     },
     mounted() {
         this.data();
@@ -32,7 +30,7 @@ export default {
 
         <!-- <img src="{{ $apartments->image_url }}" alt="{{ $apartments->name }}" style="max-width: 100%;"> -->
         <p><strong>Description:</strong> {{ apartment.description }}</p>
-        <p><strong>Address:</strong> {{ apartment.addres }}</p>
+        <p><strong>Address:</strong> {{ apartment.address }}</p>
         <div class="">
             <p><strong>services:</strong></p>
 
@@ -45,13 +43,10 @@ export default {
 
         <p><strong>Rooms:</strong> {{ apartment.room }}</p>
         <p><strong>Beds:</strong> {{ apartment.bed }}</p>
-
-
-
-
-
-
     </div>
+
+    <TomTomMaps></TomTomMaps>
+
 </template>
 
 <style scoped lang="scss">
