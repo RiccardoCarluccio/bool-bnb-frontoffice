@@ -207,17 +207,17 @@ export default {
             <div class="piè-di-pagina d-flex justify-content-between">
               <section class="pt-3 pb-3">
                   <span>© 2023 Boolbnb, Inc.</span>
-                  <span><i class="fa-solid fa-circle fa-2xs p-2"></i></span>
+                  <span> • </span>
                   <span class="p-2"><a href="https://www.airbnb.it/help/article/2855">Privacy</a></span>
-                  <span><i class="fa-solid fa-circle fa-2xs p-2"></i></span>
+                  <span> • </span>
                   <span class="p-2"><a href="https://www.airbnb.it/help/article/2908">Termini</a></span>
-                  <span><i class="fa-solid fa-circle fa-2xs p-2"></i></span>
+                  <span> • </span>
                   <span class="p-2"><a href="https://www.airbnb.it/sitemaps/v2">Mappa del sito</a></span>
-                  <span><i class="fa-solid fa-circle fa-2xs p-2"></i></span>
+                  <span> • </span>
                   <span class="p-2"><a href="https://www.airbnb.it/about/company-details">Dettagli dell'azienda</a></span>
               </section>
               <section class="pt-3 pb-3">
-                <span class="svg p-2"><i class="fa-thin fa-globe"></i></span>
+                <span class="svg p-2"><i class="fa-solid fa-globe"></i></span>
                 <span class="language p-2">Italiano (IT)</span>
                 <span class="value p-2">€ EUR</span>
                 <span class="fb-icon p-2"><a href="https://www.facebook.com/AirbnbItalia"><i class="fa-brands fa-facebook"></i></a></span>
@@ -235,7 +235,9 @@ export default {
 .footer {
   background-color: #F7F7F7;
 }
-
+.footer h5 {
+  color: #001632;
+}
 ul.nav-underline {
   border-bottom: 1px solid #DDDDDD;
 }
@@ -245,7 +247,7 @@ ul.nav-underline {
 }
 
 .footer a.nav-link:hover {
-  color: #000;
+  color: #001632;
 }
 
 .row a {
@@ -253,7 +255,7 @@ ul.nav-underline {
 }
 
 .row h6 {
-  color: #000;
+  color: #001632;
 }
 
 .row p {
@@ -288,9 +290,11 @@ section li {
 }
 .piè-di-pagina ul {
   flex-direction: row;
+  color: #001632;
 }
-.piè-di-pagina section {
-  
+.piè-di-pagina a {
+
+  color: #001632;
 }
 // @use "../../scss/partials/mixins" as *;
 // @use "../../scss/partials/variables" as *;</style>

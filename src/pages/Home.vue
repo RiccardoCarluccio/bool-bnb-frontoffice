@@ -84,6 +84,14 @@ export default {
 </template>
 
 <style scoped lang="scss">
+
+.gallery {
+  color: #001632;
+}
+.gallery a {
+  text-decoration: none;
+  color: #001632;
+}
 // @use "../../scss/partials/mixins" as *;
 // @use "../../scss/partials/variables" as *;
 </style>
