@@ -28,7 +28,7 @@ export default {
 }
 </script>
 
-<!-- <template>
+<template>
     <div class="container">
         <div class="card">
             <h1>{{ apartment.name }}</h1>
