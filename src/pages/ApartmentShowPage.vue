@@ -52,19 +52,19 @@ export default {
     <div class="container">
         <div class="row">
 
-            <div class="d-flex justify-content-between text-black"> 
+            <div class="d-flex justify-content-between text-black  distanza-sopra"> 
                 <div class="nome">
-                    
+                    <p>{{ apartment.name }}</p>
                 </div>
 
-                <div class="text-black">
+                <div class="text-black ">
                     <a href=""><i class="fa-solid fa-arrow-up-from-bracket"></i> Condividi</a>
                     <a href=""><i class="fa-regular fa-heart"></i> salva</a>
                 </div>
             </div>
 
             <div class="container">
-                <div class="row col-12">
+                <div class="row distanza-sopra">
                     <div class="col-6">
                         <button class="border-0 bg-transparent">
                             <div class="img-uno">
@@ -100,30 +100,38 @@ export default {
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     </div>
-
 
     <div class="container">
         <div class="row">
+            <h5>Italia , milano //da mettere la via </h5>
+
+            <p>{{ apartment.room }} camere da letto . 
+                {{ apartment.bed === 1 ? '1 letto' : apartment.bed <= 2 ? apartment.bed + ' letti' : apartment.bed + ' letti' }} 
+                . {{ apartment.bathroom === 1 ? '1 bagno' : apartment.bathroom <= 2 ? apartment.bathroom + ' bagni' : apartment.bathroom + ' bagni' }} </p>
+            
+        </div>
+    </div>
+
+
+    <!-- <div class="container ">
+        <div class="row">
             <div class="col-12 doci d-flex">
                 <div class="col-6">
-                    <p class="rosso">1</p>
+                    <p class="rosso"></p>
                 </div>
                 <div class="col-3">
-                    <p class="verde">2</p>
-                    <p class="blu">3</p>
+                    <p class="verde"></p>
+                    <p class="blu"></p>
                 </div>
                 <div  class="col-3">
-                    <p class="nero">4</p>
-                    <p class="giallo">5</p>
+                    <p class="nero"></p>
+                    <p class="giallo"></p>
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -163,6 +171,7 @@ export default {
     height:50px;
 
 }
+
 p {
     margin: 0%;
 }
@@ -175,28 +184,45 @@ p {
 .uno {
     min-width: 100%;
     min-height: 100%;
-    // height: 250px;
-    // width: auto;
+    object-fit:cover;
 }
 
 .img-cont  {
-    // max-width: 100%;
-    height: auto;
+    width: 320px;
+    height:250px;
     display: block;
+    max-width: 100%;
+    padding: 0%;
+    margin: 0%;
+}
+
+button,
+.col-6,
+
+.col-3 {
+    padding: 0%;
+    margin: 0%;
 }
 
 .img-uno {
     height:500px;
-    width: 560px;
+    // width: 560px;
 }
 
 .due {
-    min-width: 100%;
-    min-height: 100%;
+    // min-width: 100%;
+    // min-height: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 .row {
     padding: 0%;
+    margin: 0%;
+}
+
+.distanza-sopra {
+    padding-top: 30px;
 }
 
 </style>
