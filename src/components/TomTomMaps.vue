@@ -1,14 +1,14 @@
 <script>
 import axios from "axios";
-import tt from "@tomtom-international/web-sdk-maps";
-import "@tomtom-international/web-sdk-maps";
+// import tt from "@tomtom-international/web-sdk-maps";
+// import "@tomtom-international/web-sdk-maps";
 
 export default {
   data() {
     return {
       apartment: null,
       store,
-      tt
+      tt,
     };
   },
 
@@ -17,7 +17,7 @@ export default {
 
     axios
       .get(this.store.backendURL + "api/apartments/" + this.$route.params.id)
-      .then(response => {
+      .then((response) => {
         this.apartment = response.data.results;
 
         if (this.apartment.latitude && this.apartment.longitude) {
@@ -41,7 +41,7 @@ export default {
               <p>Address: ${this.apartment.address}</p>
               <p>Rooms: ${this.apartment.room}</p>
               <p>Beds: ${this.apartment.bed}</p>
-            </div>`
+            </div>`,
           });
 
           // Add event listener to open info window on marker click
@@ -59,11 +59,12 @@ export default {
             "I dati dell'appartamento non contengono latitudine e/o longitudine valide."
           );
           const errorElement = document.createElement("div");
-          errorElement.textContent = "Map not available due to invalid coordinates.";
+          errorElement.textContent =
+            "Map not available due to invalid coordinates.";
           document.getElementById("map").appendChild(errorElement);
         }
       })
-      .catch(error => console.error(error));
+      .catch((error) => console.error(error));
   },
 };
 </script>
@@ -85,7 +86,7 @@ export default {
   height: 400px;
 }
 
-@media screen and (max-width:767px) {
+@media screen and (max-width: 767px) {
   .map {
     height: 400px;
     width: 100%;
