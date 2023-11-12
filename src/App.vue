@@ -1,6 +1,8 @@
 <script>
 import TheHeader from "./components/TheHeader.vue";
 import TheSearchBar from "./components/TheSearchBar.vue";
+import TheFooter from "./components/TheFooter.vue";
+import TomTomMaps from "./components/TomTomMaps.vue";
 
 export default {
   components: { TheSearchBar, TheHeader, TheSearchBar },
