@@ -1,3 +1,4 @@
+
 <script>
 import axios from "axios";
 import TomTomMaps from "../components/TomTomMaps.vue";
@@ -27,7 +28,7 @@ export default {
 }
 </script>
 
-<template>
+<!-- <template>
     <div class="container">
         <div class="card">
             <h1>{{ apartment.name }}</h1>
@@ -62,4 +63,69 @@ export default {
 <style scoped lang="scss">
 @use "../../scss/partials/mixins" as *;
 @use "../../scss/partials/variables" as *;
+
+
+// .doci {
+//     height: 100px;
+// }
+// .rosso {
+//     background-color: red;
+//     height: 100px;
+// }
+
+// .verde {
+//     background-color: forestgreen;
+//     height: 50px;
+// }
+
+// .blu {
+//     background-color: blue;
+//     height: 50px;
+// }
+
+// .nero {
+//     background-color: black;
+//     height:50px;
+// }
+
+// .giallo {
+//     background-color: yellow;
+//     height:50px;
+
+// }
+// p {
+//     margin: 0%;
+// }
+
+
+.col-12 {
+    max-height: 510px;
+    overflow: hidden;
+}
+.uno {
+    height: 250px;
+    width: auto;
+}
+
+.img-cont  {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.img-uno {
+    height:500px;
+    width: 560px;
+}
+
+.due {
+    width: 100%;
+    height: 100%;
+}
+
+.row {
+    padding: 0%;
+}
+
 </style>
+
