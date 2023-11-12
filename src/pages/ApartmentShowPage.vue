@@ -17,10 +17,7 @@ export default {
                 .then((resp) => {
                     this.apartment = resp.data;
                 })
-        },
-        getImgUrl(apartment) {
-            return `http://127.0.0.1:8000/storage/${apartment.images}`;
-        },
+        }
     },
     mounted() {
         this.data();
@@ -28,36 +25,109 @@ export default {
 }
 </script>
 
-<template>
+<!-- <template>
     <div class="container">
-        <div class="card">
-            <h1>{{ apartment.name }}</h1>
+        <h1>{{ apartment.name }}</h1>
+        <p><strong>Description:</strong> {{ apartment.description }}</p>
+        <p><strong>Address:</strong> {{ apartment.address }}</p>
+        <div class="">
+            <p><strong>services:</strong></p>
 
-            <div class="carousel-inner">
-                <div class="card-image p-0 rounded-3 carousel-item active" :class="{ active: index === 0 }">
-                    <img :src="getImgUrl(apartment)" class="card-img-top p-2 d-block w-100"
-                        style="height: 300px; object-fit: contain;" alt="" />
-                </div>
-            </div>
-            <div class="card-body">
-
-                <p><strong>Description:</strong> {{ apartment.description }}</p>
-                <p><strong>Address:</strong> {{ apartment.address }}</p>
-                <p><strong>services:</strong></p>
-
-                <div class="d-flex align-items-center" v-for="service in apartment.services">
-                    <i class="">{{ service.icon }}</i>
-                    <p>{{ service.name }}</p>
-                </div>
-
+            <div class="d-flex align-items-center" v-for="service in apartment.services">
+                <i class="">{{ service.icon }}</i>
+                <p>{{ service.name }}</p>
             </div>
 
-            <p><strong>Rooms:</strong> {{ apartment.room }}</p>
-            <p><strong>Beds:</strong> {{ apartment.bed }}</p>
+        </div>
 
-            <TomTomMaps></TomTomMaps>
+        <p><strong>Rooms:</strong> {{ apartment.room }}</p>
+        <p><strong>Beds:</strong> {{ apartment.bed }}</p>
+    </div>
+    <TomTomMaps></TomTomMaps>
+</template> -->
+
+
+<template>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="d-flex justify-content-between text-black"> 
+                <div class="nome">
+                    
+                </div>
+
+                <div class="text-black">
+                    <a href=""><i class="fa-solid fa-arrow-up-from-bracket"></i> Condividi</a>
+                    <a href=""><i class="fa-regular fa-heart"></i> salva</a>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row col-12">
+                    <div class="col-6">
+                        <button class="border-0 bg-transparent">
+                            <div class="img-uno">
+                                <img class="rounded-start-4 due" src="../assets/img/b7c9264d-73c9-45c3-882e-6e9577d63d68.webp" alt="">
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="col-3">
+                        <button class="border-0 bg-transparent">
+                            <div class="img-cont">
+                                <img class="uno" src="../assets/img/062ef52a-9b4f-4301-9413-e757d1758b3f.webp" alt="">
+                            </div>
+                        </button>
+                        <button class="border-0 bg-transparent">
+                            <div class="img-cont">
+                                <img class="uno" src="../assets/img/150e47d8-76b8-4233-8724-cbbd12880848.webp" alt="">
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="col-3">
+                        <button class="border-0 bg-transparent">
+                            <div class="img-cont">
+                                <img class="uno" src="../assets/img/4588d88f-0224-42f4-94cb-594f4d362fba.webp" alt="">
+                            </div>
+                        </button>
+                        <button class="border-0 bg-transparent">
+                            <div class="img-cont">
+                                <img class="uno" src="../assets/img/e922f0c3-9a3d-4877-983a-56849ce92e18.webp" alt="">
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
+
+
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-12 doci d-flex">
+                <div class="col-6">
+                    <p class="rosso">1</p>
+                </div>
+                <div class="col-3">
+                    <p class="verde">2</p>
+                    <p class="blu">3</p>
+                </div>
+                <div  class="col-3">
+                    <p class="nero">4</p>
+                    <p class="giallo">5</p>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
 </template>
 
 <style scoped lang="scss">
