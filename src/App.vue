@@ -1,9 +1,18 @@
 <script>
 import TheSearchBar from "./components/TheSearchBar.vue";
+import TheFooter from "./components/TheFooter.vue";
+import TomTomMaps from "./components/TomTomMaps.vue";
 
 export default {
-  TheSearchBar,
-  components: { TheSearchBar },
+  components: { 
+    TheSearchBar,
+    TheFooter
+   },
+   data() {
+    return {
+      TomTomMaps
+    };
+   },
 };
 </script>
 
@@ -28,14 +37,16 @@ export default {
       </div>
     </nav>
   </header>
-  <!-- <TheHeader></TheHeader> -->
+
+  <TheHeader></TheHeader>
 
   <main>
-
     <RouterView></RouterView>
   </main>
 
-  <!-- <TheFooter></TheFooter> -->
+  <TheFooter></TheFooter>
+
 </template>
 
 <style lang="scss"></style>
+
