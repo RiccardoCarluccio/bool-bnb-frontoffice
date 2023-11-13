@@ -12,9 +12,9 @@ export default {
     };
   },
   methods: {
-    openAdvancedSearch() {
-      this.showAdvancedSearch = true;
-    },
+    // openAdvancedSearch() {
+    //   this.showAdvancedSearch = true;
+    // },
     checkScreenSize() {
       this.isSmallScreen = window.innerWidth < 770;
     },
@@ -23,9 +23,9 @@ export default {
     this.checkScreenSize();
     window.addEventListener("resize", this.checkScreenSize);
   },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.checkScreenSize);
-  },
+  // beforeDestroy() {
+  //   window.removeEventListener("resize", this.checkScreenSize);
+  // },
 };
 </script>
 
@@ -33,19 +33,21 @@ export default {
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container d-flex justify-content-between align-items-center">
+        <!-- MEDIA SCREEN -->
+
         <router-link
           v-if="!isSmallScreen"
           :to="{ name: 'home' }"
           class="navbar-brand"
         >
-          <img src="\src\assets\Risorsa 8port creatt.png" alt="logo full" />
+          <img src="\src\assets\img\Risorsa 8port creatt.png" alt="logo full" />
         </router-link>
         <router-link
           v-if="isSmallScreen"
           :to="{ name: 'home' }"
           class="navbar-brand"
         >
-          <img src="\src\assets\Risorsa 7port creatt.png" alt="logo mini" />
+          <img src="\src\assets\img\Risorsa 7port creatt.png" alt="logo mini" />
         </router-link>
 
         <!-- SEARCH BAR -->

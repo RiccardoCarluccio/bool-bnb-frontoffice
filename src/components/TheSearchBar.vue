@@ -1,6 +1,6 @@
 <script>
-import axios from "axios";
-import AdvancedSearchCard from "./AdvanceSearchCard.vue";
+// import axios from "axios";
+// import AdvancedSearchCard from "./AdvanceSearchCard.vue";
 
 export default {
   data() {
@@ -11,34 +11,34 @@ export default {
     };
   },
   methods: {
-    searchApartments() {
-      // API REQUEST
-      axios
-        .get("http://127.0.0.1:8000/api/apartments", {
-          params: { query: this.searchQuery },
-        })
-        .then((response) => {
-          this.searchResults = response.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    },
-    openAdvancedSearch() {
-      this.showAdvancedSearchCard = true;
-      document.addEventListener("click", this.closeAdvancedSearch);
-    },
-    closeAdvancedSearch(event) {
-      const searchContainer = this.$refs.searchContainer;
-      if (
-        searchContainer &&
-        !searchContainer.contains(event.target) &&
-        !event.target.classList.contains("advanced-search-card-trigger")
-      ) {
-        this.showAdvancedSearchCard = false;
-        document.removeEventListener("click", this.closeAdvancedSearch);
-      }
-    },
+    // searchApartments() {
+    //   API REQUEST
+    //   axios
+    //     .get("http://127.0.0.1:8000/api/apartments", {
+    //       params: { query: this.searchQuery },
+    //     })
+    //     .then((response) => {
+    //       this.searchResults = response.data;
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+    // },
+    // openAdvancedSearch() {
+    //   this.showAdvancedSearchCard = true;
+    //   document.addEventListener("click", this.closeAdvancedSearch);
+    // },
+    // closeAdvancedSearch(event) {
+    //   const searchContainer = this.$refs.searchContainer;
+    //   if (
+    //     searchContainer &&
+    //     !searchContainer.contains(event.target) &&
+    //     !event.target.classList.contains("advanced-search-card-trigger")
+    //   ) {
+    //     this.showAdvancedSearchCard = false;
+    //     document.removeEventListener("click", this.closeAdvancedSearch);
+    //   }
+    // },
   },
   components: {
     AdvancedSearchCard,
@@ -51,7 +51,7 @@ export default {
 <template>
   <div class="container d-flex align-items-center justify-content-center">
     <div class="search-box">
-      <button class="btn-search" @click.prevent="searchApartments">
+      <button class="btn-search">
         <i class="fas fa-search"></i>
       </button>
       <input
@@ -63,26 +63,6 @@ export default {
       />
     </div>
   </div>
-
-  <!-- Search Results -->
-  <div class="page-content">
-    <div class="card-deck">
-      <div v-for="apartment in searchResults" :key="apartment.id" class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ apartment.name }}</h5>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Advanced Search Card -->
-  <div
-    ref="advancedSearchCard"
-    class="container advanced-search-card"
-    v-if="showAdvancedSearchCard"
-  >
-    <AdvancedSearchCard />
-  </div>
 </template>
 
 <style lang="scss">
@@ -90,16 +70,6 @@ export default {
 ///
 ///
 ///
-.advanced-search-card {
-  position: fixed;
-  top: 4.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  height: 30%;
-  padding-left: 3rem;
-  background-color: #f8f9fa;
-}
 
 .search-icon {
   position: absolute;
@@ -131,9 +101,9 @@ export default {
   outline: none;
   border-radius: 25px;
   transition: all 0.5s ease-in-out;
-  background-color: #dbdbdb;
+  background-color: #ffe1de;
   padding-right: 40px;
-  color: #ffffff;
+  color: #001632;
 }
 
 .input-search::placeholder {
@@ -157,6 +127,11 @@ export default {
   color: #001632;
   background-color: transparent;
   pointer-events: painted;
+}
+
+.btn-search:hover {
+  // color: white;
+  font-size: 1.5rem;
 }
 
 .btn-search:focus ~ .input-search,
