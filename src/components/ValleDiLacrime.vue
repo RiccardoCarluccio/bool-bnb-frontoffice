@@ -51,7 +51,7 @@
       getApartments() {
         axios.get('http://127.0.0.1:8000/api/apartments')
           .then((res) => {
-            this.apartments = res.data;
+            this.apartments = res.data;                                       //non funziona, nonostante in "Home.vue" sia scritto allo stesso modo
           })
           .catch((error) => {
             console.error('Errore durante la richiesta API:', error);
