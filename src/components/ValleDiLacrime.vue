@@ -34,10 +34,17 @@
     <div v-if="results.length > 0">
       <h2>Lista indirizzi più pertinenti:</h2>
       <ul>
-        <li v-for="(result, index) in results" :key="index">
+        <li v-for="(result, index) in results" :key="index">          <!-- andrebbe aggiunta la possibilità di selezionare un indirizzo al click del mouse -->
           {{ result.address.freeformAddress }}                        <!-- "freeformAddress" è una chiave dell'API TomTom -->
         </li>
       </ul>
+
+      <div>
+        <h2>Risultato più pertinente</h2>
+        <h3>{{ results[0].address.freeformAddress }}</h3>
+        <p>Latitudine: {{ results[0].position.lat }}</p>
+        <p>Longitudine: {{ results[0].position.lon }}</p>
+      </div>
     </div>
   </div>  
 </template>
