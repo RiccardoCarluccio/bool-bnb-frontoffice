@@ -5,7 +5,7 @@ import TheFooter from "./components/TheFooter.vue";
 import TomTomMaps from "./components/TomTomMaps.vue";
 
 export default {
-  components: { TheSearchBar, TheHeader, TheSearchBar },
+  components: { TheSearchBar, TheHeader, TheFooter },
 };
 </script>
 
@@ -37,7 +37,7 @@ export default {
     <RouterView></RouterView>
   </main>
   <footer>
-    <!-- <TheFooter></TheFooter> -->
+    <TheFooter></TheFooter>
   </footer>
 </template>
 
