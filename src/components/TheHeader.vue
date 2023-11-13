@@ -33,6 +33,7 @@ export default {
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container d-flex justify-content-between align-items-center">
+        <!-- LOGO -->
         <router-link
           v-if="!isSmallScreen"
           :to="{ name: 'home' }"
@@ -50,12 +51,13 @@ export default {
 
         <!-- SEARCH BAR -->
         <div
-          class="d-flex align-items-center flex-grow-1 justify-content-center"
+          class="pt-3 d-flex align-items-center flex-grow-1 justify-content-end"
         >
           <TheSearchBar
             @open-advanced-search="openAdvancedSearch"
           ></TheSearchBar>
         </div>
+
         <!-- BURGER BTN -->
         <button
           class="navbar-toggler"

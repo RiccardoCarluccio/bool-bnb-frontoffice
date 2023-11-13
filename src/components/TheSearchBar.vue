@@ -49,47 +49,62 @@ export default {
 <!-- ///////////////////////////////// -->
 <!-- ///////////////////////////////// -->
 <template>
-  <div class="container d-flex align-items-center justify-content-center">
-    <div class="search-box">
-      <button class="btn-search" @click.prevent="searchApartments">
-        <i class="fas fa-search"></i>
-      </button>
-      <input
-        v-model="searchQuery"
-        @focus="openAdvancedSearch"
-        class="input-search"
-        type="text"
-        placeholder="Dove si va ?"
-      />
-    </div>
-  </div>
+  <div
+    class="container d-flex align-items-center flex-grow-1 justify-content-end"
+  >
+    <div class="search-container">
+      <div class="search-box">
+        <button class="btn-search" @click.prevent="searchApartments">
+          <i class="fas fa-search"></i>
+        </button>
+        <input
+          v-model="searchQuery"
+          @focus="openAdvancedSearch"
+          class="input-search"
+          type="text"
+          placeholder="Dove si va ?"
+        />
+      </div>
 
-  <!-- Search Results -->
-  <div class="page-content">
-    <div class="card-deck">
-      <div v-for="apartment in searchResults" :key="apartment.id" class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ apartment.name }}</h5>
+      <!-- Search Results -->
+      <div class="page-content">
+        <div class="card-deck">
+          <div
+            v-for="apartment in searchResults"
+            :key="apartment.id"
+            class="card"
+          >
+            <div class="card-body">
+              <h5 class="card-title">{{ apartment.name }}</h5>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Advanced Search Card -->
-  <div
-    ref="advancedSearchCard"
-    class="container advanced-search-card"
-    v-if="showAdvancedSearchCard"
-  >
-    <AdvancedSearchCard />
+      <!-- Advanced Search Card -->
+      <div
+        ref="advancedSearchCard"
+        class="advanced-search-card"
+        v-if="showAdvancedSearchCard"
+      >
+        <AdvancedSearchCard />
+      </div>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-//////////////////////////////////////////
-///
-///
-///
+.search-box {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
 .advanced-search-card {
   position: fixed;
   top: 4.5rem;
