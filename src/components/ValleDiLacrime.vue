@@ -7,6 +7,10 @@
         searchText: '',                       //indirizzo salvato dall'utente
         results: [],                          //risultati indirizzi                     DA CANCELLARE?
         apartments: [],                       //risultati BnB
+        selectedAddress: {                    //array di oggetti che contiene i dati dell'indirizzo cliccato
+          address: {},                        //vengono salvati i dati allo stesso modo di come sono salvati nell'API di TomTom
+          position: {},
+        },
       }
     },
     methods: {
@@ -22,6 +26,14 @@
             }
          });
       },
+      getApartmentsWithinRadius(latitude, longitude) {
+        //calcolo raggio di distanza
+        //da completare
+      },
+      selectAddress(result) {
+        this.searchText = result.address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
+        this.selectedAddress = result;                                        //vengono salvati nell'array del "data() return{}" i dettagli dell'indirizzo
+      },
     },
   }
 </script>
@@ -34,7 +46,7 @@
     <div v-if="results.length > 0">
       <h2>Lista indirizzi più pertinenti:</h2>
       <ul>
-        <li v-for="(result, index) in results" :key="index">          <!-- andrebbe aggiunta la possibilità di selezionare un indirizzo al click del mouse -->
+        <li class="address-list" v-for="(result, index) in results" :key="index" @click="selectAddress(result)">     <!-- al click del mouse, la barra di ricerca viene completata con l'indirizzo selezionato -->
           {{ result.address.freeformAddress }}                        <!-- "freeformAddress" è una chiave dell'API TomTom -->
         </li>
       </ul>
@@ -50,4 +62,10 @@
 </template>
 
 <style scoped lang="scss">
+  @use "../../scss/partials/mixins" as *;
+  @use "../../scss/partials/variables" as *;
+
+  .address-list {
+    cursor: pointer;
+  }
 </style>
