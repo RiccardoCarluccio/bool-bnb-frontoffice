@@ -92,12 +92,12 @@ export default {
               >
             </li>
             <li class="nav-item">
-              <router-link
+              <!-- <router-link
                 :to="{ name: 'contacts' }"
                 class="nav-link"
                 :class="{ 'active-link': $route.name === 'contacts' }"
                 >Contatti</router-link
-              >
+              > -->
             </li>
             <li class="nav-item">
               <router-link
