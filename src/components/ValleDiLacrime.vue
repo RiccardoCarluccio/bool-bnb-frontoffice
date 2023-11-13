@@ -6,7 +6,7 @@
       return {
         searchText: '',                       //indirizzo salvato dall'utente
         results: [],                          //risultati indirizzi
-        apartments: [],                       //risultati BnB
+        apartments: [],                       //lista appartamenti salvati nel database
         selectedAddress: {                    //array di oggetti che contiene i dati dell'indirizzo cliccato
           address: {},                        //vengono salvati i dati allo stesso modo di come sono salvati nell'API di TomTom
           position: {},
@@ -48,6 +48,18 @@
         const distance = R * c;
         return distance;
       },
+      getApartments() {
+        axios.get('http://127.0.0.1:8000/api/apartments')
+          .then((res) => {
+            this.apartments = res.data;
+          })
+          .catch((error) => {
+            console.error('Errore durante la richiesta API:', error);
+          });
+      },
+    },
+    mounted() {
+      this.getApartments();
     },
   }
 </script>
@@ -72,7 +84,17 @@
         <p>Longitudine: {{ results[0].position.lon }}</p>
       </div>
     </div>
-  </div>  
+
+    <div>
+      {{ apartments }}
+    </div>
+  </div>
+  
+  <div class="container">
+    <div>
+
+    </div>
+  </div>
 </template>
 
 <style scoped lang="scss">
