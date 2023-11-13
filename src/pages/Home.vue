@@ -1,7 +1,8 @@
 <script>
+import axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-import axios from "axios";
+
 export default {
   data() {
 
@@ -42,7 +43,7 @@ export default {
 <template>
   <div class="gallery">
     <div class="row p-3 d-flex justify-content-center">
-      <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12 m-2 p-2 rounded-3" v-for="apartment in apartments"
+      <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12 m-2 p-2" v-for="apartment in apartments"
         :key="apartment.id">
 
         <div :id="'carouselExampleIndicators' + apartment.id" class="carousel slide">
@@ -56,7 +57,7 @@ export default {
           </div>
           <div class="carousel-inner">
             <div class="card-image p-0 carousel-item active" :class="{ active: index === 0 }">
-              <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 d-block img-fluid w-100 h-100"
+              <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 d-block img-fluid"
                 style="max-height: 300px; min-height: 220px; object-fit: cover;" alt="" />
             </div>
           </div>
@@ -72,10 +73,11 @@ export default {
 
         <div class="card-body h-50">
           <div class="row d-flex">
-            <h2></h2>
-            <span class="text-decoration-none"><router-link
-                :to="{ name: 'apartments.show', params: { id: apartment.id } }">{{ apartment.name }}</router-link></span>
-            <span class="text-decoration-none">{{ apartment.address }}</span>
+            <span class="text-decoration-none mt-2">
+              <router-link :to="{ name: 'apartments.show', params: { id: apartment.id } }">{{ apartment.name
+              }}</router-link>
+            </span>
+            <span class="text-decoration-none mt-2">{{ apartment.address }}</span>
           </div>
         </div>
       </div>
@@ -92,6 +94,10 @@ export default {
 .gallery a {
   text-decoration: none;
   color: #001632;
+}
+
+.carousel-inner img {
+  aspect-ratio: 1/1;
 }
 
 .carousel-indicators button {
@@ -132,4 +138,5 @@ export default {
 }
 
 // @use "../../scss/partials/mixins" as *;
-// @use "../../scss/partials/variables" as *;</style>
+// @use "../../scss/partials/variables" as *;
+</style>
