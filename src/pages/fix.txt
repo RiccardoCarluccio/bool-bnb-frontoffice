@@ -1,0 +1,828 @@
+THE HEADER
+
+
+
+
+
+
+
+
+<script>
+import TheSearchBar from "./TheSearchBar.vue";
+
+export default {
+  components: {
+    TheSearchBar,
+  },
+  data() {
+    return {
+      showAdvancedSearch: false,
+      isSmallScreen: false,
+    };
+  },
+  methods: {
+    openAdvancedSearch() {
+      this.showAdvancedSearch = true;
+    },
+    checkScreenSize() {
+      this.isSmallScreen = window.innerWidth < 770;
+    },
+  },
+  mounted() {
+    this.checkScreenSize();
+    window.addEventListener("resize", this.checkScreenSize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.checkScreenSize);
+  },
+};
+</script>
+
+<template>
+  <header>
+    <nav class="navbar navbar-expand-md navbar-light">
+      <div class="container d-flex justify-content-between align-items-center">
+        <router-link v-if="!isSmallScreen" :to="{ name: 'home' }" class="navbar-brand">
+          <img src="\src\assets\Risorsa 6port creatt.png" alt="logo full" />
+        </router-link>
+        <router-link v-if="isSmallScreen" :to="{ name: 'home' }" class="navbar-brand">
+          <img src="\src\assets\Risorsa 7port creatt.png" alt="logo mini" />
+        </router-link>
+
+        <!-- SEARCH BAR -->
+        <div class="d-flex align-items-center flex-grow-1 justify-content-center">
+          <TheSearchBar @open-advanced-search="openAdvancedSearch"></TheSearchBar>
+        </div>
+        <!-- BURGER BTN -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- NAV LINKS -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <router-link :to="{ name: 'home' }" class="nav-link"
+                :class="{ 'active-link': $route.name === 'home' }">Home</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'apartments' }" class="nav-link"
+                :class="{ 'active-link': $route.name === 'apartments' }">Appartamenti</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'contacts' }" class="nav-link"
+                :class="{ 'active-link': $route.name === 'contacts' }">Contatti</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'about-us' }" class="nav-link"
+                :class="{ 'active-link': $route.name === 'about-us' }">Su di noi</router-link>
+            </li>
+            <li class="nav-item">
+              <router-link :to="{ name: 'login' }" class="nav-link"
+                :class="{ 'active-link': $route.name === 'login' }">Login</router-link>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+</template>
+
+<style lang="scss">
+img {
+  height: 35px;
+}
+
+@media (max-width: 770px) {
+  .navbar-brand {
+    display: block;
+  }
+}
+
+@media (max-width: 460px) {
+  .navbar-brand {
+    display: none;
+  }
+}
+
+.navbar {
+  background-color: #fff;
+  border-bottom: 1px solid #EBEBEB;
+}
+
+.navbar-nav {
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-nav a {
+  position: relative;
+  padding: 15px;
+  text-decoration: none;
+  color: #001632;
+}
+
+.navbar-nav a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  top: 0;
+  height: 3px;
+  background-color: #d87767;
+  transition: right 0.3s ease;
+}
+
+.navbar-nav a:hover::before {
+  right: 0;
+}
+
+.navbar-nav a:hover {
+  color: #001632;
+}
+
+.navbar-nav .active-link::before {
+  right: 0;
+}
+
+.navbar-nav .active-link {
+  color: #001632;
+  font-weight: bold;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+THE SEARCH BAR
+
+
+
+
+<script>
+import axios from "axios";
+import AdvancedSearchCard from "./AdvanceSearchCard.vue";
+
+export default {
+  data() {
+    return {
+      searchQuery: "",
+      locationQuery: "",
+      showAdvancedSearchCard: false,
+      searchResults: [],
+    };
+  },
+  methods: {
+    searchApartments() {
+      // API REQUEST
+      axios
+        .get("http://127.0.0.1:8000/api/apartments", {
+          params: { query: this.searchQuery },
+        })
+        .then((response) => {
+          this.searchResults = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    openAdvancedSearch() {
+      this.showAdvancedSearchCard = true;
+      document.addEventListener("click", this.closeAdvancedSearch);
+    },
+    closeAdvancedSearch(event) {
+      const searchContainer = this.$refs.searchContainer;
+      if (
+        searchContainer &&
+        !searchContainer.contains(event.target) &&
+        !event.target.classList.contains("advanced-search-card-trigger")
+      ) {
+        this.showAdvancedSearchCard = false;
+        document.removeEventListener("click", this.closeAdvancedSearch);
+      }
+    },
+  },
+  components: {
+    AdvancedSearchCard,
+  },
+};
+</script>
+<!-- ///////////////////////////////// -->
+<!-- ///////////////////////////////// -->
+<!-- ///////////////////////////////// -->
+<template>
+  <div>
+    <div class="product-search d-flex rounded-3">
+      <div class="search-element d-flex">
+        <input v-model="searchQuery" @focus="openAdvancedSearch" class="input-search" type="text"
+          placeholder="Cosa cerchi ?" />
+        <input v-model="locationQuery" @focus="openAdvancedSearch" class="input-search" type="text"
+          placeholder="Dove ?" />
+        <button class="search-button btn" @click.prevent="searchApartments" type="button"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <i class="fas fa-search"></i>
+        </button>
+        <div class="page-content">
+          <div class="card-deck">
+            <div v-for="apartment in searchResults" :key="apartment.id" class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{ apartment.name }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ref="advancedSearchCard" class="container advanced-search-card" v-if="showAdvancedSearchCard">
+          <AdvancedSearchCard />
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Search Results -->
+
+
+  <!-- Advanced Search Card -->
+</template>
+
+
+<style lang="scss">
+//////////////////////////////////////////
+///
+///
+///
+
+
+.product-search {
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+  margin: 0 auto;
+  box-shadow: rgba(0, 0, 0, .172549) 0 6px 12px 0;
+  cursor: pointer;
+  position: relative; // Aggiunto
+}
+
+
+.search-element {
+  display: flex;
+  flex-grow: 2;
+  flex-direction: row;
+  padding: .4rem;
+  height: 60px;
+}
+
+.search-label {
+  font-weight: 700;
+}
+
+.input-search {
+  border: none;
+  appearance: none;
+  outline: none;
+  width: 100%;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+}
+
+.search-button {
+  display: inline-block;
+  flex-grow: 1;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 1rem;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: 50px;
+  color: white;
+  background-color: #001632;
+  transition: background-color 0.8s ease;
+}
+
+.search-button:hover {
+  background-color: HSLA(345, 50%, 55%, 3.00);
+}
+</style>
+
+
+
+
+
+ADVANCE SEARCH CARD
+
+
+
+<script>
+export default {
+  
+};
+</script>
+
+<template>
+  <div class="advanced-search-card">
+    <p>metti robe per ricerca avanzata</p>
+    <p>metti robe per ricerca avanzata</p>
+    <p>metti robe per ricerca avanzata</p>
+  </div>
+</template>
+
+<style lang="scss">
+
+.advanced-search-card {
+  position: absolute;
+  top: 100%; // Posiziona sotto il barra di ricerca
+  left: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding-left: 3rem;
+  height: 30%;
+  z-index: 1; // Assicurati che il dropdown sia sopra il resto del contenuto
+}
+
+p {
+  color: #001632;
+}
+</style>
+
+
+
+
+
+
+
+// HOME.VUE
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import axios from "axios";
+export default {
+  data() {
+
+    return {
+      apartments: [],
+      searchQuery: "",
+      searchApartment: null,
+    };
+  },
+  computed: {
+    filteredApartments() {
+      if (!this.searchQuery) {
+        return this.apartments;
+      }
+      return this.apartments.filter((apartment) => {
+        return apartment.name
+          .toLowerCase()
+          .includes(this.searchQuery.toLowerCase());
+      });
+    },
+  },
+  methods: {
+    loadData() {
+      axios.get("http://127.0.0.1:8000/api/apartments").then((resp) => {
+        this.apartments = resp.data;
+      });
+    },
+    getImgUrl(apartment) {
+      return `http://127.0.0.1:8000/storage/${apartment.images}`;
+    },
+  },
+  mounted() {
+    this.loadData();
+  },
+};
+</script>
+
+<template>
+  <div class="gallery">
+    <div class="row p-3 d-flex justify-content-center">
+      <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12 m-2 p-2 rounded-3" v-for="apartment in apartments"
+        :key="apartment.id">
+
+        <div :id="'carouselExampleIndicators' + apartment.id" class="carousel slide">
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+              aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+              aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+              aria-label="Slide 3"></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="card-image p-0 carousel-item active" :class="{ active: index === 0 }">
+              <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 d-block img-fluid w-100 h-100"
+                style="max-height: 300px; min-height: 220px; object-fit: cover;" alt="" />
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span aria-hidden="true"><i class="fa-solid fa-circle-arrow-left"></i></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span aria-hidden="true"><i class="fa-solid fa-circle-arrow-right"></i></span>
+          </button>
+        </div>
+
+        <div class="card-body h-50">
+          <div class="row d-flex">
+            <h2></h2>
+            <span class="text-decoration-none"><router-link
+                :to="{ name: 'apartments.show', params: { id: apartment.id } }">{{ apartment.name }}</router-link></span>
+            <span class="text-decoration-none">{{ apartment.address }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped lang="scss">
+.gallery {
+  color: #001632;
+  padding-top: 71px;
+}
+
+.gallery a {
+  text-decoration: none;
+  color: #001632;
+}
+
+.carousel-indicators button {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background-color: #888;
+  /* Colore di sfondo dei pallini non attivi */
+}
+
+/* Nascondi le frecce direzionali all'inizio */
+.carousel-control-prev,
+.carousel-control-next {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Mostra le frecce direzionali quando il mouse è sopra il carosello */
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+  opacity: .8;
+}
+
+/* Stile per le frecce direzionali */
+.carousel-control-prev,
+.carousel-control-next {
+  font-size: 1rem;
+  /* Regola la dimensione delle frecce */
+  color: #fff;
+  /* Colore delle frecce */
+  background: transparent;
+  /* Sfondo trasparente */
+  border: none;
+  /* Senza bordo */
+  outline: none;
+  /* Senza contorno */
+}
+
+// @use "../../scss/partials/mixins" as *;
+// @use "../../scss/partials/variables" as *;</style>
+
+
+
+
+
+
+
+
+
+
+
+THE FOOTER
+
+
+
+
+
+
+
+
+<script>
+export default {
+
+}
+</script>
+
+<template>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="first-footer p-5">
+        <div>
+          <div>
+            <h5>Ispirazione per i tuoi prossimi viaggi</h5>
+          </div>
+          <ul class="nav nav-underline">
+            <li class="nav-item"><a href="#" class="nav-link">Popolari</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Destinazioni storiche</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Mare</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Isole</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Montagne</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Categorie</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Attività</a></li>
+          </ul>
+          <div class="destinations-container pt-5 d-flex">
+            <ul class="row list-unstyled">
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>New York</h6>
+                  <p>La Grande Mela</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Tokyo</h6>
+                  <p>La città dei contrasti</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Roma</h6>
+                  <p>La città eterna</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Berlino</h6>
+                  <p>Capitale della cultura</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Seoul</h6>
+                  <p>Hub tecnologico con tradizione</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Lisbona</h6>
+                  <p>La città delle sette colline</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Cape Town</h6>
+                  <p>Il Cuore del Sudafrica</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Barcellona</h6>
+                  <p>La perla del mediterraneo</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Mumbai</h6>
+                  <p>La città dei sogni</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Parigi</h6>
+                  <p>La città delle luci</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Bangkok</h6>
+                  <p>Metropoli vibrante</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Hong Kong</h6>
+                  <p>La porta d'oriente</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Londra</h6>
+                  <p>Maestosità storica</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Mosca</h6>
+                  <p>Capitale del Cremlino</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Dubai</h6>
+                  <p>Città dei Superlativi</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Amsterdam</h6>
+                  <p>La Venezia del nord</p>
+                </a>
+              </li>
+              <li class="col-lg-2 col-md-4 col-sm-6">
+                <a href="#">
+                  <h6>Vienna</h6>
+                  <p>Città della musica</p>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <h6>Rio de Janeiro</h6>
+                  <p>Cidade Maravilhosa</p>
+                </a>
+              </li>
+              <!-- Aggiungi altre città secondo necessità -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="second-footer">
+        <div class="row ps-5 pe-5 d-flex justify-content-around w-100">
+          <section class="col-lg-4 col-md-8 col-sm-12 pt-5 pb-5">
+            <h6>Assistenza</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#">Centro Assistenza</a>
+              </li>
+              <li>
+                <a href="#">BoolCover</a>
+              </li>
+              <li>
+                <a href="#">Antidiscriminazione</a>
+              </li>
+              <li>
+                <a href="#">Supporto alla disabilità</a>
+              </li>
+              <li>
+                <a href="#">Opzioni di cancellazione</a>
+              </li>
+              <li>
+                <a href="#">Segnala problema nel quartiere</a>
+              </li>
+            </ul>
+          </section>
+          <section class="col-lg-4 col-md-8 col-sm-12 pt-5 pb-5">
+            <h6>Ospitare</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#">Apri un Boolbnb</a>
+              </li>
+              <li>
+                <a href="#">BoolCover per gli host</a>
+              </li>
+              <li>
+                <a href="#">Risorse per gli host</a>
+              </li>
+              <li>
+                <a href="#">Forum della community</a>
+              </li>
+              <li>
+                <a href="#">Ospitare responsabilmente</a>
+              </li>
+            </ul>
+          </section>
+          <section class="col-lg-4 col-md-8 col-sm-12 pt-5 pb-5">
+            <h6>Boolbnb</h6>
+            <ul class="list-unstyled">
+              <li>
+                <a href="#">Newsroom</a>
+              </li>
+              <li>
+                <a href="#">Nuove funzionalità</a>
+              </li>
+              <li>
+                <a href="#">Opportunità di lavoro</a>
+              </li>
+              <li>
+                <a href="#">Investitori</a>
+              </li>
+              <li>
+                <a href="#">Gift card</a>
+              </li>
+              <li>
+                <a href="#">Soggiorni con Boolbnb.org</a>
+              </li>
+            </ul>
+          </section>
+            <div class="piè-di-pagina d-flex justify-content-between">
+              <section class="pt-3 pb-3">
+                  <span>© 2023 Boolbnb, Inc.</span>
+                  <span> • </span>
+                  <span class="p-2"><a href="https://www.airbnb.it/help/article/2855">Privacy</a></span>
+                  <span> • </span>
+                  <span class="p-2"><a href="https://www.airbnb.it/help/article/2908">Termini</a></span>
+                  <span> • </span>
+                  <span class="p-2"><a href="https://www.airbnb.it/sitemaps/v2">Mappa del sito</a></span>
+                  <span> • </span>
+                  <span class="p-2"><a href="https://www.airbnb.it/about/company-details">Dettagli dell'azienda</a></span>
+              </section>
+              <section class="pt-3 pb-3">
+                <span class="svg p-2"><i class="fa-solid fa-globe"></i></span>
+                <span class="language p-2">Italiano (IT)</span>
+                <span class="value p-2">€ EUR</span>
+                <span class="fb-icon p-2"><a href="https://www.facebook.com/AirbnbItalia"><i class="fa-brands fa-facebook"></i></a></span>
+                <span class="x-icon p-2"><a href="https://twitter.com/airbnb_it"><i class="fa-brands fa-x-twitter"></i></a></span>
+                <span class="ig-icon p-2"><a href="https://www.instagram.com/airbnb"><i class="fa-brands fa-square-instagram"></i></a></span>
+              </section>
+            </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<style scoped lang="scss">
+.footer {
+  background-color: #F7F7F7;
+}
+.footer h5 {
+  color: #001632;
+}
+ul.nav-underline {
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.footer a.nav-link {
+  color: #717171;
+}
+
+.footer a.nav-link:hover {
+  color: #001632;
+}
+
+.row a {
+  text-decoration: none;
+}
+
+.row h6 {
+  color: #001632;
+}
+
+.row p {
+  color: #717171;
+}
+
+.first-footer {
+  border-bottom: 1px solid #DDDDDD;
+  font-size: .8rem;
+}
+
+.destination-container {
+  display: flex;
+  align-content: center;
+}
+
+.second-footer {
+  border-bottom: 1px solid #DDDDDD;
+  font-size: .8rem;
+}
+
+.second-footer section {
+  border-bottom: 1px solid #DDDDDD;
+}
+
+.row a {
+  color: #717171;
+}
+
+section li {
+  line-height: 2rem;
+}
+.piè-di-pagina ul {
+  flex-direction: row;
+  color: #001632;
+}
+.piè-di-pagina a {
+
+  color: #001632;
+}
+// @use "../../scss/partials/mixins" as *;
+// @use "../../scss/partials/variables" as *;</style>

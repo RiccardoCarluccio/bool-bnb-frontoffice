@@ -1,4 +1,6 @@
 <script>
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import axios from "axios";
 export default {
   data() {
@@ -54,21 +56,17 @@ export default {
           </div>
           <div class="carousel-inner">
             <div class="card-image p-0 carousel-item active" :class="{ active: index === 0 }">
-              <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 p-2 d-block img-fluid w-100 h-100"
+              <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 d-block img-fluid w-100 h-100"
                 style="max-height: 300px; min-height: 220px; object-fit: cover;" alt="" />
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
             data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"><i
-                class="fa-solid fa-circle-arrow-left"></i></span>
-            <span class="visually-hidden">Previous</span>
+            <span aria-hidden="true"><i class="fa-solid fa-circle-arrow-left"></i></span>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
             data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"><i
-                class="fa-solid fa-circle-arrow-right"></i></span>
-            <span class="visually-hidden">Next</span>
+            <span aria-hidden="true"><i class="fa-solid fa-circle-arrow-right"></i></span>
           </button>
         </div>
 
@@ -88,6 +86,7 @@ export default {
 <style scoped lang="scss">
 .gallery {
   color: #001632;
+  padding-top: 71px;
 }
 
 .gallery a {
@@ -96,11 +95,41 @@ export default {
 }
 
 .carousel-indicators button {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin: 0 5px;
-    background-color: #888; /* Colore di sfondo dei pallini non attivi */
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin: 0 5px;
+  background-color: #888;
+  /* Colore di sfondo dei pallini non attivi */
 }
+
+/* Nascondi le frecce direzionali all'inizio */
+.carousel-control-prev,
+.carousel-control-next {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Mostra le frecce direzionali quando il mouse è sopra il carosello */
+.carousel:hover .carousel-control-prev,
+.carousel:hover .carousel-control-next {
+  opacity: .8;
+}
+
+/* Stile per le frecce direzionali */
+.carousel-control-prev,
+.carousel-control-next {
+  font-size: 1rem;
+  /* Regola la dimensione delle frecce */
+  color: #fff;
+  /* Colore delle frecce */
+  background: transparent;
+  /* Sfondo trasparente */
+  border: none;
+  /* Senza bordo */
+  outline: none;
+  /* Senza contorno */
+}
+
 // @use "../../scss/partials/mixins" as *;
 // @use "../../scss/partials/variables" as *;</style>
