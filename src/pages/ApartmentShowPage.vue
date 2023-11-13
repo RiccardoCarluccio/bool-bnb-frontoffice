@@ -54,12 +54,12 @@ export default {
 
             <div class="d-flex justify-content-between text-black  distanza-sopra"> 
                 <div class="nome">
-                    <p>{{ apartment.name }}</p>
+                    <p class="fs-2">{{ apartment.name }}</p>
                 </div>
 
-                <div class="text-black ">
-                    <a href=""><i class="fa-solid fa-arrow-up-from-bracket"></i> Condividi</a>
-                    <a href=""><i class="fa-regular fa-heart"></i> salva</a>
+                <div class="">
+                    <a class="text-black" href=""> <i class="fa-solid fa-arrow-up-from-bracket"></i> Condividi</a>
+                    <a class="text-black" href=""> <i class="fa-regular fa-heart"></i> salva</a>
                 </div>
             </div>
 
@@ -75,13 +75,13 @@ export default {
 
                     <div class="col-3">
                         <button class="border-0 bg-transparent">
-                            <div class="img-cont">
-                                <img class="uno" src="../assets/img/062ef52a-9b4f-4301-9413-e757d1758b3f.webp" alt="">
+                            <div class="img-cont ">
+                                <img class="uno " src="../assets/img/062ef52a-9b4f-4301-9413-e757d1758b3f.webp" alt="">
                             </div>
                         </button>
                         <button class="border-0 bg-transparent">
                             <div class="img-cont">
-                                <img class="uno" src="../assets/img/150e47d8-76b8-4233-8724-cbbd12880848.webp" alt="">
+                                <img class="uno " src="../assets/img/150e47d8-76b8-4233-8724-cbbd12880848.webp" alt="">
                             </div>
                         </button>
                     </div>
@@ -89,12 +89,12 @@ export default {
                     <div class="col-3">
                         <button class="border-0 bg-transparent">
                             <div class="img-cont">
-                                <img class="uno" src="../assets/img/4588d88f-0224-42f4-94cb-594f4d362fba.webp" alt="">
+                                <img class="uno angolo-alto" src="../assets/img/4588d88f-0224-42f4-94cb-594f4d362fba.webp" alt="">
                             </div>
                         </button>
                         <button class="border-0 bg-transparent">
                             <div class="img-cont">
-                                <img class="uno" src="../assets/img/e922f0c3-9a3d-4877-983a-56849ce92e18.webp" alt="">
+                                <img class="uno angolo-basso" src="../assets/img/e922f0c3-9a3d-4877-983a-56849ce92e18.webp" alt="">
                             </div>
                         </button>
                     </div>
@@ -103,16 +103,39 @@ export default {
         </div>
     </div>
 
-    <div class="container">
+    <div class="container distanza-sopra">
         <div class="row">
             <h5>Italia , milano //da mettere la via </h5>
 
             <p>{{ apartment.room }} camere da letto . 
                 {{ apartment.bed === 1 ? '1 letto' : apartment.bed <= 2 ? apartment.bed + ' letti' : apartment.bed + ' letti' }} 
                 . {{ apartment.bathroom === 1 ? '1 bagno' : apartment.bathroom <= 2 ? apartment.bathroom + ' bagni' : apartment.bathroom + ' bagni' }} </p>
-            
         </div>
     </div>
+
+    <div class="container distanza-sopra " >
+        <div class="row col-7">
+            <p>{{ apartment.description }}</p>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="container distanza-sopra" >
+        <div class="row col-7">
+            <h5>Dove dormirai</h5>
+            <div  class=" box-camera">
+                <img class="img-camera rounded-3" src="../assets/img/150e47d8-76b8-4233-8724-cbbd12880848.webp" alt="">
+            </div>
+            
+            <p>lorem*210</p>
+            <strong>{{ apartment.room }} Camera da letto</strong>
+
+            <br>
+        </div>
+    </div>
+
+
 
 
     <!-- <div class="container ">
@@ -225,5 +248,26 @@ button,
     padding-top: 30px;
 }
 
+.box-camera {
+    width: 320px;
+    height: 215px;
+}
+
+.img-camera {
+    height: 100%;
+    width: 100%;
+}
+
+.angolo-basso {
+    border-radius: 0  0 15px ;
+}
+
+.angolo-alto {
+    border-radius: 0  15px 0 ;
+}
+
+.nero {
+    color: black;
+}
 </style>
 
