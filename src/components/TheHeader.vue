@@ -15,24 +15,22 @@ export default {
     openAdvancedSearch() {
       this.showAdvancedSearch = true;
     },
-    checkScreenSize() {
-      this.isSmallScreen = window.innerWidth < 770;
-    },
   },
-  mounted() {
-    this.checkScreenSize();
-    window.addEventListener("resize", this.checkScreenSize);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.checkScreenSize);
-  },
+  // mounted() {
+  //   this.checkScreenSize();
+  //   window.addEventListener("resize", this.checkScreenSize);
+  // },
+  // beforeDestroy() {
+  //   window.removeEventListener("resize", this.checkScreenSize);
+  // },
 };
 </script>
 
 <template>
-  <header>
+  <header style="position: fixed; z-index: 10000">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container d-flex justify-content-between align-items-center">
+        <!-- LOGO -->
         <router-link
           v-if="!isSmallScreen"
           :to="{ name: 'home' }"
@@ -50,12 +48,13 @@ export default {
 
         <!-- SEARCH BAR -->
         <div
-          class="d-flex align-items-center flex-grow-1 justify-content-center"
+          class="pt-3 d-flex align-items-center flex-grow-1 justify-content-end"
         >
           <TheSearchBar
             @open-advanced-search="openAdvancedSearch"
           ></TheSearchBar>
         </div>
+
         <!-- BURGER BTN -->
         <button
           class="navbar-toggler"
@@ -122,7 +121,22 @@ export default {
   </header>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.search-bar-container {
+  transition: margin-top 0.3s ease-in-out;
+}
+
+.advanced-search-open .search-bar-container {
+  margin-top: 10rem;
+}
 img {
   height: 35px;
 }
