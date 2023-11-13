@@ -8,14 +8,33 @@ export default {
       searchQuery: "",
       showAdvancedSearchCard: false,
       searchResults: [],
+      advancedFilters: {
+        location: "",
+        distance: 0,
+        services: [],
+      },
+      availableServices: [],
     };
   },
   methods: {
-    searchApartments() {
-      // API REQUEST
+    async fetchServices() {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/services");
+        this.availableServices = response.data;
+      } catch (error) {
+        console.error("Error fetching services:", error);
+      }
+    },
+    async searchApartments() {
+      // Fetch services before making the apartment search
+      await this.fetchServices();
+
+      const apiUrl = "http://127.0.0.1:8000/api/apartments";
+
+      // Update the API request to include the search query and advanced filters
       axios
-        .get("http://127.0.0.1:8000/api/apartments", {
-          params: { query: this.searchQuery },
+        .get(apiUrl, {
+          params: { query: this.searchQuery, ...this.advancedFilters },
         })
         .then((response) => {
           this.searchResults = response.data;
@@ -24,8 +43,31 @@ export default {
           console.error(error);
         });
     },
+    // --------------
+    // --------------
+    // --------------
+    // --------------
+    // --------------
+    searchApartments() {
+      // ------------------
+      const apiUrl = "http://127.0.0.1:8000/api/apartments";
+      this.$emit("search-apartments", this.searchQuery);
+      axios
+        .get(apiUrl, {
+          params: { query: this.searchQuery, ...this.advancedFilters },
+        })
+        .then((response) => {
+          this.searchResults = response.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      // ------------------
+    },
     openAdvancedSearch() {
       this.showAdvancedSearchCard = true;
+      document.body.classList.add("advanced-search-open");
       document.addEventListener("click", this.closeAdvancedSearch);
     },
     closeAdvancedSearch(event) {
@@ -37,7 +79,11 @@ export default {
       ) {
         this.showAdvancedSearchCard = false;
         document.removeEventListener("click", this.closeAdvancedSearch);
+        document.body.classList.remove("advanced-search-open");
       }
+    },
+    applyFilters(filters) {
+      this.advancedFilters = { ...this.advancedFilters, ...filters };
     },
   },
   components: {
@@ -45,14 +91,15 @@ export default {
   },
 };
 </script>
-<!-- ///////////////////////////////// -->
-<!-- ///////////////////////////////// -->
-<!-- ///////////////////////////////// -->
+
 <template>
   <div
     class="container d-flex align-items-center flex-grow-1 justify-content-end"
   >
-    <div class="search-container">
+    <div
+      class="search-bar-container"
+      :class="{ 'advanced-search-open': showAdvancedSearchCard }"
+    >
       <div class="search-box">
         <button class="btn-search" @click.prevent="searchApartments">
           <i class="fas fa-search"></i>
@@ -87,13 +134,15 @@ export default {
         class="advanced-search-card"
         v-if="showAdvancedSearchCard"
       >
-        <AdvancedSearchCard />
+        <div @click.stop>
+          <AdvancedSearchCard @applyFilters="applyFilters" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .search-box {
   position: relative;
 }
@@ -107,7 +156,7 @@ export default {
 
 .advanced-search-card {
   position: fixed;
-  top: 4.5rem;
+  top: 4.6rem;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -122,12 +171,6 @@ export default {
   left: 15px;
   transform: translateY(-50%);
 }
-
-// ___________________
-// ___________________
-// ___________________
-// ___________________
-// ___________________
 
 .search-box {
   width: fit-content;
@@ -148,7 +191,7 @@ export default {
   transition: all 0.5s ease-in-out;
   background-color: #dbdbdb;
   padding-right: 40px;
-  color: #ffffff;
+  color: #d87767;
 }
 
 .input-search::placeholder {

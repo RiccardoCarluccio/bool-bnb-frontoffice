@@ -5,7 +5,12 @@ import TheFooter from "./components/TheFooter.vue";
 import TomTomMaps from "./components/TomTomMaps.vue";
 
 export default {
-  components: { TheSearchBar, TheHeader, TheSearchBar },
+  components: { TheSearchBar, TheHeader, TheFooter },
+  methods: {
+    handleSearch(searchQuery) {
+      // Handle the search query at the app level if needed
+    },
+  },
 };
 </script>
 
@@ -31,14 +36,17 @@ export default {
       </div>
     </nav>
   </header> -->
-  <TheHeader></TheHeader>
-
-  <main>
-    <RouterView></RouterView>
-  </main>
-  <footer>
-    <!-- <TheFooter></TheFooter> -->
-  </footer>
+  <div>
+    <TheHeader></TheHeader>
+    <main>
+      <RouterView></RouterView>
+      <TheSearchBar @search-apartments="handleSearch"></TheSearchBar>
+      <!-- Rest of your content -->
+    </main>
+    <footer>
+      <TheFooter></TheFooter>
+    </footer>
+  </div>
 </template>
 
 <style lang="scss"></style>
