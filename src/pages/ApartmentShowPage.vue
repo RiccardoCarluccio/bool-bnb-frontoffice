@@ -107,7 +107,7 @@ export default {
     </div>
 
 
-    <!-- <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-12 doci d-flex">
                 <div class="col-6">
@@ -123,7 +123,7 @@ export default {
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
 
 
@@ -135,37 +135,37 @@ export default {
 @use "../../scss/partials/variables" as *;
 
 
-// .doci {
-//     height: 100px;
-// }
-// .rosso {
-//     background-color: red;
-//     height: 100px;
-// }
+.doci {
+    height: 100px;
+}
+.rosso {
+    background-color: red;
+    height: 100px;
+}
 
-// .verde {
-//     background-color: forestgreen;
-//     height: 50px;
-// }
+.verde {
+    background-color: forestgreen;
+    height: 50px;
+}
 
-// .blu {
-//     background-color: blue;
-//     height: 50px;
-// }
+.blu {
+    background-color: blue;
+    height: 50px;
+}
 
-// .nero {
-//     background-color: black;
-//     height:50px;
-// }
+.nero {
+    background-color: black;
+    height:50px;
+}
 
-// .giallo {
-//     background-color: yellow;
-//     height:50px;
+.giallo {
+    background-color: yellow;
+    height:50px;
 
-// }
-// p {
-//     margin: 0%;
-// }
+}
+p {
+    margin: 0%;
+}
 
 
 .col-12 {
@@ -173,12 +173,14 @@ export default {
     overflow: hidden;
 }
 .uno {
-    height: 250px;
-    width: auto;
+    min-width: 100%;
+    min-height: 100%;
+    // height: 250px;
+    // width: auto;
 }
 
 .img-cont  {
-    max-width: 100%;
+    // max-width: 100%;
     height: auto;
     display: block;
 }
@@ -189,8 +191,8 @@ export default {
 }
 
 .due {
-    width: 100%;
-    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
 }
 
 .row {
