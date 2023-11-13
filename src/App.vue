@@ -31,9 +31,6 @@ export default {
   <!-- <TheHeader></TheHeader> -->
 
   <main>
-
-    <ValleDiLacrime></ValleDiLacrime>
-
     <RouterView></RouterView>
   </main>
 
@@ -41,8 +38,5 @@ export default {
 </template>
 
 <style lang="scss">
-  body {
-    background-color: oklch(34.71% 0.072 235);            //placeholder per non bruciarmi le retine
-    color: white;
-  }
+
 </style>
