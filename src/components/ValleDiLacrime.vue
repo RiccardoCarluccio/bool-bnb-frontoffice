@@ -5,7 +5,7 @@
     data () {
       return {
         searchText: '',                       //indirizzo salvato dall'utente
-        results: [],                          //risultati indirizzi                     DA CANCELLARE?
+        results: [],                          //risultati indirizzi
         apartments: [],                       //risultati BnB
         selectedAddress: {                    //array di oggetti che contiene i dati dell'indirizzo cliccato
           address: {},                        //vengono salvati i dati allo stesso modo di come sono salvati nell'API di TomTom
@@ -34,13 +34,27 @@
         this.searchText = result.address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
         this.selectedAddress = result;                                        //vengono salvati nell'array del "data() return{}" i dettagli dell'indirizzo
       },
+      haversineDistance(lat1, lon1, lat2, lon2) {
+        // Converte le latitudini e longitudini da gradi a radianti
+        const toRadians = (angle) => (angle * Math.PI) / 180;
+        const R = 6371; // Raggio medio della Terra in km
+        const dLat = toRadians(lat2 - lat1);
+        const dLon = toRadians(lon2 - lon1);
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        // Calcola la distanza
+        const distance = R * c;
+        return distance;
+      },
     },
   }
 </script>
 
 <template>
   <div class="container">
-    <input class="text-center" type="text" v-model="searchText" @keyup="getAddress" placeholder="Inserisci un indirizzo">       <!-- la ricerca avviene alla pressione di ogni tasto -->
+    <input class="text-center" type="text" v-model="searchText" @keyup="getAddress" @keyup.enter="getApartmentsWithinRadius" placeholder="Inserisci un indirizzo">       <!-- la ricerca avviene alla pressione di ogni tasto -->
     <button @click="getAddress" type="submit" class="btn cerca_color mx-2">Cerca</button>
 
     <div v-if="results.length > 0">
@@ -53,7 +67,7 @@
 
       <div>
         <h2>Risultato più pertinente</h2>
-        <h3>{{ results[0].address.freeformAddress }}</h3>
+        <h4>{{ results[0].address.freeformAddress }}</h4>
         <p>Latitudine: {{ results[0].position.lat }}</p>
         <p>Longitudine: {{ results[0].position.lon }}</p>
       </div>

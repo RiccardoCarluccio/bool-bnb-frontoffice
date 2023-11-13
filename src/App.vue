@@ -40,4 +40,9 @@ export default {
   <!-- <TheFooter></TheFooter> -->
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+  body {
+    background-color: oklch(34.71% 0.072 235);            //placeholder per non bruciarmi le retine
+    color: white;
+  }
+</style>
