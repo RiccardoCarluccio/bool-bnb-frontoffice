@@ -1,9 +1,10 @@
 <script>
 import TheSearchBar from "./components/TheSearchBar.vue";
+import ValleDiLacrime from "./components/ValleDiLacrime.vue";
 
 export default {
   TheSearchBar,
-  components: { TheSearchBar },
+  components: { TheSearchBar, ValleDiLacrime },
 };
 </script>
 
@@ -30,6 +31,8 @@ export default {
   <!-- <TheHeader></TheHeader> -->
 
   <main>
+
+    <ValleDiLacrime></ValleDiLacrime>
 
     <RouterView></RouterView>
   </main>

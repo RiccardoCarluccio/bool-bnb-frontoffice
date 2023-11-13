@@ -23,7 +23,16 @@
   <div class="container">
     <input class="text-center" type="text" v-model="searchText" @keyup.enter="getAddress" placeholder="Inserisci un indirizzo">
     <button @click="getAddress" type="submit" class="btn cerca_color mx-2">Cerca</button>
-  </div>
+
+    <div v-if="results.length > 0">
+      <h2>Risultati della ricerca:</h2>
+      <ul>
+        <li v-for="(result, index) in results" :key="index">
+          {{ result.address.freeformAddress }}
+        </li>
+      </ul>
+    </div>
+  </div>  
 </template>
 
 <style scoped lang="scss">
