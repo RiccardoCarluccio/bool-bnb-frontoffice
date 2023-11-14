@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import Home from "./pages/Home.vue";
-import Contacts from "./pages/Contacts.vue";
+// import Contacts from "./components/Contacts.vue";
 import AboutUs from "./pages/AboutUs.vue";
 import Apartments from "./pages/Apartments.vue";
 import ApartmentShowPage from "./pages/ApartmentShowPage.vue";
@@ -14,11 +14,11 @@ const routes = [
     name: "home", //nome della rotta da usare per creare un link
     component: Home, //componente che ritorna l'html della pagina
   },
-  {
-    path: "/contacts",
-    name: "contacts",
-    component: Contacts,
-  },
+  // {
+  //   path: "/contacts",
+  //   name: "contacts",
+  //   component: Contacts,
+  // },
   {
     path: "/about-us",
     name: "about-us",
