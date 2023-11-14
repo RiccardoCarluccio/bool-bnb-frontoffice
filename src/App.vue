@@ -33,12 +33,10 @@ export default {
   </header> -->
   <TheHeader></TheHeader>
 
-  <main>
-    <RouterView></RouterView>
-  </main>
-  <footer>
-    <TheFooter></TheFooter>
-  </footer>
+  <RouterView></RouterView>
+  
+  <TheFooter></TheFooter>
+
 </template>
 
 <style lang="scss">
