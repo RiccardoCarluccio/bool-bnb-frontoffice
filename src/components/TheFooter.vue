@@ -136,8 +136,8 @@ export default {
           </div>
         </div>
       </div>
-      <div class="second-footer">
-        <div class="row ps-5 pe-5 d-flex justify-content-around w-100">
+      <div class="second-footer ps-5 pe-5">
+        <div class="row d-flex justify-content-around w-100">
           <section class="col-lg-4 col-md-8 col-sm-12 pt-5 pb-5">
             <h6>Assistenza</h6>
             <ul class="list-unstyled">
