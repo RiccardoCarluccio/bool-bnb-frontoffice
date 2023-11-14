@@ -1,29 +1,64 @@
-
 <script>
+
+// import axios from "axios";
+// import TomTomMaps from "../components/TomTomMaps.vue";
+// import TheCalendario from '../components/TheCalendario.vue';
+// export default {
+//     data() {
+//         return {
+//             apartment: {},
+//             TomTomMaps,
+//             TheCalendario,
+//         };
+//     },
+//     methods: {
+//         data() {
+//             console.log(this.$route.params);
+//             axios.get("http://127.0.0.1:8000/api/apartments/" + this.$route.params.id)
+//                 .then((resp) => {
+//                     this.apartment = resp.data;
+//                 })
+//         }
+//     },
+//     mounted() {
+//         this.data();
+//     }
+// }
+
+
 import axios from "axios";
 import TomTomMaps from "../components/TomTomMaps.vue";
+import TheCalendario from '../components/TheCalendario.vue';
 
 export default {
     data() {
         return {
             apartment: {},
-            TomTomMaps,
         };
     },
     methods: {
-        data() {
+        fetchData() {
             console.log(this.$route.params);
             axios.get("http://127.0.0.1:8000/api/apartments/" + this.$route.params.id)
                 .then((resp) => {
                     this.apartment = resp.data;
                 })
+                .catch((error) => {
+                    console.error("Error fetching apartment data:", error);
+                });
         }
     },
     mounted() {
-        this.data();
-    }
+        this.fetchData();
+    },
+    components: {
+        TomTomMaps,
+        TheCalendario,
+    },
 }
 </script>
+
+
 
 <!-- <template>
     <div class="container">
@@ -51,6 +86,7 @@ export default {
 
     <div class="container">
         <div class="row">
+            
 
             <div class="d-flex justify-content-between text-black  distanza-sopra"> 
                 <div class="nome">
@@ -136,6 +172,11 @@ export default {
     </div>
 
 
+            <TheCalendario></TheCalendario>
+
+
+
+
 
 
     <!-- <div class="container ">
@@ -166,34 +207,34 @@ export default {
 @use "../../scss/partials/variables" as *;
 
 
-.doci {
-    height: 100px;
-}
-.rosso {
-    background-color: red;
-    height: 100px;
-}
+// .doci {
+//     height: 100px;
+// }
+// .rosso {
+//     background-color: red;
+//     height: 100px;
+// }
 
-.verde {
-    background-color: forestgreen;
-    height: 50px;
-}
+// .verde {
+//     background-color: forestgreen;
+//     height: 50px;
+// }
 
-.blu {
-    background-color: blue;
-    height: 50px;
-}
+// .blu {
+//     background-color: blue;
+//     height: 50px;
+// }
 
-.nero {
-    background-color: black;
-    height:50px;
-}
+// .nero {
+//     background-color: black;
+//     height:50px;
+// }
 
-.giallo {
-    background-color: yellow;
-    height:50px;
+// .giallo {
+//     background-color: yellow;
+//     height:50px;
 
-}
+// }
 
 p {
     margin: 0%;
@@ -208,6 +249,7 @@ p {
     min-width: 100%;
     min-height: 100%;
     object-fit:cover;
+    aspect-ratio: 1/1;
 }
 
 .img-cont  {
