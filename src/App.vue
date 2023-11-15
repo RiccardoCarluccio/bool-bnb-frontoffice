@@ -2,10 +2,16 @@
 import TheHeader from "./components/TheHeader.vue";
 import TheSearchBar from "./components/TheSearchBar.vue";
 import TheFooter from "./components/TheFooter.vue";
-import TomTomMaps from "./components/TomTomMaps.vue";
+import ValleDiLacrime from "./components/ValleDiLacrime.vue";
 
 export default {
-  components: { TheSearchBar, TheHeader, TheFooter },
+  components:
+  {
+    TheSearchBar,
+    TheHeader,
+    TheFooter,
+    ValleDiLacrime
+  },
 };
 </script>
 
@@ -34,6 +40,7 @@ export default {
   <TheHeader></TheHeader>
 
   <RouterView></RouterView>
+  <ValleDiLacrime></ValleDiLacrime>
   
   <TheFooter></TheFooter>
 

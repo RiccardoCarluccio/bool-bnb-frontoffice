@@ -26,9 +26,21 @@
             }
          });
       },
-      getApartmentsWithinRadius(latitude, longitude) {
-        //calcolo raggio di distanza
-        //da completare
+      getApartmentsWithinRadius() {
+        axios.get('http://127.0.0.1:8000/api/apartments')
+          .then((res) => {
+            res.data.forEach((apartment) => {
+              const apartmentLat = apartment.latitude;
+              const apartmentLon = apartment.longitude;
+              const distance = this.haversineDistance(this.selectedAddress.position.lat, this.selectedAddress.position.lon, apartmentLat, apartmentLon);
+              if(distance < 20) {
+                console.log(apartment);
+              }
+            })
+          })
+          .catch((error) => {
+            console.error('Errore durante la chiamata API:', error);
+          })
       },
       selectAddress(result) {
         this.searchText = result.address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
@@ -78,15 +90,11 @@
       </ul>
 
       <div>
-        <h2>Risultato più pertinente</h2>
-        <h4>{{ results[0].address.freeformAddress }}</h4>
-        <p>Latitudine: {{ results[0].position.lat }}</p>
-        <p>Longitudine: {{ results[0].position.lon }}</p>
+        <h2>Risultato selezionato</h2>
+        <h4>{{ selectedAddress.address.freeformAddress }}</h4>
+        <p>Latitudine: {{ selectedAddress.position.lat }}</p>
+        <p>Longitudine: {{ selectedAddress.position.lon }}</p>
       </div>
-    </div>
-
-    <div>
-      {{ apartments }}
     </div>
   </div>
   
