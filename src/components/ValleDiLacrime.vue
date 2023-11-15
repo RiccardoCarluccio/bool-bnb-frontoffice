@@ -22,7 +22,7 @@
             if(firstResult) {
               const latitude = firstResult.position.lat;                      //"latitudine" e "longitudine" vengono rese disponibili come variabili
               const longitude = firstResult.position.lon;
-              this.getApartmentsWithinRadius(latitude, longitude);            //viene richiamata la funzione di calcolo distanza dal punto di ricerca
+              //this.getApartmentsWithinRadius(latitude, longitude);            //viene richiamata la funzione di calcolo distanza dal punto di ricerca
             }
          });
       },
@@ -30,9 +30,8 @@
         axios.get('http://127.0.0.1:8000/api/apartments')
           .then((res) => {
             res.data.forEach((apartment) => {
-              const apartmentLat = apartment.latitude;
-              const apartmentLon = apartment.longitude;
-              const distance = this.haversineDistance(this.selectedAddress.position.lat, this.selectedAddress.position.lon, apartmentLat, apartmentLon);
+              debugger
+              const distance = this.haversineDistance(this.selectedAddress.position.lat, this.selectedAddress.position.lon, apartment.latitude, apartment.longitude);
               if(distance < 20) {
                 console.log(apartment);
               }
@@ -45,6 +44,7 @@
       selectAddress(result) {
         this.searchText = result.address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
         this.selectedAddress = result;                                        //vengono salvati nell'array del "data() return{}" i dettagli dell'indirizzo
+        this.getApartmentsWithinRadius();
       },
       haversineDistance(lat1, lon1, lat2, lon2) {
         // Converte le latitudini e longitudini da gradi a radianti
@@ -63,7 +63,7 @@
       getApartments() {
         axios.get('http://127.0.0.1:8000/api/apartments')
           .then((res) => {
-            this.apartments = res.data;                                       //non funziona, nonostante in "Home.vue" sia scritto allo stesso modo
+            this.apartments = res.data;
           })
           .catch((error) => {
             console.error('Errore durante la richiesta API:', error);
