@@ -46,10 +46,15 @@ export default {
                 .catch((error) => {
                     console.error("Error fetching apartment data:", error);
                 });
-        }
+                
+        },
+        getImgUrl(apartment) {
+      return `http://127.0.0.1:8000/storage/${apartment.images}`;
+  },
     },
     mounted() {
         this.fetchData();
+        
     },
     components: {
         TomTomMaps,
@@ -101,7 +106,7 @@ export default {
 
             <div class="container">
                 <div class="row distanza-sopra">
-                    <div class="col-6">
+                    <!-- <div class="col-6">
                         <button class="border-0 bg-transparent efetto">
                             <div class="img-uno">
                                 <img class="rounded-start-4 due" src="../assets/img/b7c9264d-73c9-45c3-882e-6e9577d63d68.webp" alt="">
@@ -131,6 +136,14 @@ export default {
                         <button class="border-0 bg-transparent efetto">
                             <div class="img-cont">
                                 <img class="uno angolo-basso" src="../assets/img/e922f0c3-9a3d-4877-983a-56849ce92e18.webp" alt="">
+                            </div>
+                        </button>
+                    </div> -->
+
+                    <div class="col-12">
+                        <button class="border-0 bg-transparent efetto">
+                            <div class="img-uno">
+                                <img class="rounded-start-4 due img-fluid" :src="getImgUrl(apartment)" alt="">
                             </div>
                         </button>
                     </div>
