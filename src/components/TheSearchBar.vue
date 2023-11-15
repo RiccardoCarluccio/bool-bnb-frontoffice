@@ -17,21 +17,21 @@ export default {
     };
   },
   methods: {
-    async fetchServices() {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/api/services");
-        this.availableServices = response.data;
-      } catch (error) {
-        console.error("Error fetching services:", error);
-      }
+    getApartments() {
+      axios
+        .get("http://127.0.0.1:8000/api/apartments")
+        .then((res) => {
+          this.searchResults = res.data;
+        })
+        .catch((error) => {
+          console.error("Errore durante la richiesta API:", error);
+        });
     },
     async searchApartments() {
-      // Fetch services before making the apartment search
       await this.fetchServices();
 
       const apiUrl = "http://127.0.0.1:8000/api/apartments";
 
-      // Update the API request to include the search query and advanced filters
       axios
         .get(apiUrl, {
           params: { query: this.searchQuery, ...this.advancedFilters },
@@ -43,28 +43,7 @@ export default {
           console.error(error);
         });
     },
-    // --------------
-    // --------------
-    // --------------
-    // --------------
-    // --------------
-    searchApartments() {
-      // ------------------
-      const apiUrl = "http://127.0.0.1:8000/api/apartments";
-      this.$emit("search-apartments", this.searchQuery);
-      axios
-        .get(apiUrl, {
-          params: { query: this.searchQuery, ...this.advancedFilters },
-        })
-        .then((response) => {
-          this.searchResults = response.data;
-        })
-        .catch((error) => {
-          console.error(error);
-        });
 
-      // ------------------
-    },
     openAdvancedSearch() {
       this.showAdvancedSearchCard = true;
       document.body.classList.add("advanced-search-open");

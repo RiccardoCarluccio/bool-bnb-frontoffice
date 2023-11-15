@@ -42,7 +42,6 @@ export default {
       <span class="input-group-text">{{ filters.distance }} km</span>
     </div>
 
-    <!-- Loop over available services with checkboxes -->
     <div
       v-for="service in availableServices"
       :key="service.id"
