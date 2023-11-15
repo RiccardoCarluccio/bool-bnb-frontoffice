@@ -41,6 +41,10 @@ export default {
           this.noApartmentsFound = true; // Set the flag when no apartments are found
         });
     },
+    applyFiltersOnEnter() {
+      // Trigger applyFilters when the "Enter" key is pressed inside the search bar
+      this.applyFilters();
+    },
     closeAdvancedSearch() {
       // Close the advanced search when clicking outside the search bar or logo
       this.isAdvancedSearchOpen = false;
@@ -98,6 +102,7 @@ export default {
           <input
             v-model="searchQuery"
             @click="toggleAdvancedSearch"
+            @keydown.enter.prevent="applyFiltersOnEnter"
             type="text"
             class="form-control"
             placeholder="Dove si va..."
@@ -105,7 +110,7 @@ export default {
           <!-- Advanced Search Dropdown -->
           <div
             v-if="isAdvancedSearchOpen"
-            class="advanced-search-container position-absolute d-flex align-items-center justify-content-center"
+            class="advanced-search-container position-absolute"
           >
             <div
               class="advanced-search bg-light border rounded p-2 gap-5 d-flex"
@@ -200,8 +205,8 @@ export default {
               </div>
 
               <!-- Button to apply filters -->
-              <div class="form-group p-3 text-center">
-                <button @click="applyFilters" class="btn btn-primary">
+              <div class="button-container">
+                <button @click="applyFilters" class="btn btn-apply-filters">
                   Applica i Filtri
                 </button>
               </div>
@@ -289,25 +294,6 @@ export default {
 </template>
 
 <style lang="scss" scoped>
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-}
-
-.search-bar-container {
-  transition: margin-top 0.3s ease-in-out;
-}
-
-.advanced-search-open .search-bar-container {
-  margin-top: 10rem;
-}
-img {
-  height: 35px;
-}
-
 @media (max-width: 994px) {
   .small-logo {
     display: block;
@@ -357,6 +343,33 @@ img {
   }
 }
 
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.search-bar-container {
+  transition: margin-top 0.3s ease-in-out;
+}
+
+.advanced-search-open .search-bar-container {
+  margin-top: 10rem;
+}
+img {
+  height: 35px;
+}
+
+.advanced-search-container {
+  position: fixed;
+  top: 380%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1001; /* Adjust z-index as needed */
+}
+
 .navbar-nav {
   display: flex;
   justify-content: space-between;
@@ -404,5 +417,21 @@ img {
 .mini-p {
   font-size: 0.8rem;
   color: #757575;
+}
+
+.button-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.btn-apply-filters {
+  background-color: #001632;
+  color: #fff;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #d87767;
+  }
 }
 </style>
