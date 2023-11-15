@@ -100,7 +100,7 @@
         <h2>Appartamenti nelle vicinanze</h2>
 
         <div v-for="nearbyApartment in nearbyApartments">
-          <a href=""><h4>{{ nearbyApartment }}</h4></a>
+          <a class="destylize" href=""><h5>{{ nearbyApartment }}</h5></a>
         </div>
       </div>
     </div>
@@ -113,5 +113,10 @@
 
   .address-list {
     cursor: pointer;
+  }
+
+  .destylize {
+    text-decoration: none;
+    color: black;
   }
 </style>
