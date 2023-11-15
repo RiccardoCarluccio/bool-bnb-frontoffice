@@ -29,6 +29,7 @@
 import axios from "axios";
 import TomTomMaps from "../components/TomTomMaps.vue";
 import Contacts from "../components/Contacts.vue";
+import TheCalendario from '../components/TheCalendario.vue';
 
 export default {
     components: {
@@ -67,7 +68,7 @@ export default {
 }
 </script>
 
-<template>
+<!-- <template>
     <div class="container">
         <h1>{{ apartment.name }}</h1>
         <p><strong>Descrizione:</strong> {{ apartment.description }}</p>
@@ -88,11 +89,11 @@ export default {
         <Contacts :apartment_id="apartment.id"></Contacts>
     </div>
     
-    <!-- <TomTomMaps></TomTomMaps> -->
-</template>
+    <TomTomMaps></TomTomMaps>
+</template> -->
 
 
-<!-- <template>
+<template>
     <div class="container">
         <div class="row">
 
@@ -142,7 +143,7 @@ export default {
                                 <img class="uno angolo-basso" src="../assets/img/e922f0c3-9a3d-4877-983a-56849ce92e18.webp" alt="">
                             </div>
                         </button>
-                    </div> -->
+                    </div>  -->
 
                     <div class="col-12">
                         <button class="border-0 bg-transparent efetto">
@@ -222,7 +223,8 @@ export default {
             </div>
         </div>
     </div>
-</div></template> -->
+</div>-->
+</template> 
 
 <style scoped lang="scss">
 @use "../../scss/partials/mixins" as *;
