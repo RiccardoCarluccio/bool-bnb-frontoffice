@@ -94,15 +94,15 @@ export default {
                 </div>
 
                 <div class="">
-                    <a class="text-black" href=""> <i class="fa-solid fa-arrow-up-from-bracket"></i> Condividi</a>
-                    <a class="text-black" href=""> <i class="fa-regular fa-heart"></i> salva</a>
+                    <a class="text-black distanza" href=""> <i class="fa-solid fa-arrow-up-from-bracket distanza-icon"></i> Condividi</a>
+                    <a class="text-black distanza" href=""> <i class="fa-regular fa-heart distanza-icon"></i> salva</a>
                 </div>
             </div>
 
             <div class="container">
                 <div class="row distanza-sopra">
                     <div class="col-6">
-                        <button class="border-0 bg-transparent">
+                        <button class="border-0 bg-transparent efetto">
                             <div class="img-uno">
                                 <img class="rounded-start-4 due" src="../assets/img/b7c9264d-73c9-45c3-882e-6e9577d63d68.webp" alt="">
                             </div>
@@ -110,12 +110,12 @@ export default {
                     </div>
 
                     <div class="col-3">
-                        <button class="border-0 bg-transparent">
+                        <button class="border-0 bg-transparent efetto">
                             <div class="img-cont ">
                                 <img class="uno " src="../assets/img/062ef52a-9b4f-4301-9413-e757d1758b3f.webp" alt="">
                             </div>
                         </button>
-                        <button class="border-0 bg-transparent">
+                        <button class="border-0 bg-transparent efetto">
                             <div class="img-cont">
                                 <img class="uno " src="../assets/img/150e47d8-76b8-4233-8724-cbbd12880848.webp" alt="">
                             </div>
@@ -123,12 +123,12 @@ export default {
                     </div>
 
                     <div class="col-3">
-                        <button class="border-0 bg-transparent">
+                        <button class="border-0 bg-transparent efetto">
                             <div class="img-cont">
                                 <img class="uno angolo-alto" src="../assets/img/4588d88f-0224-42f4-94cb-594f4d362fba.webp" alt="">
                             </div>
                         </button>
-                        <button class="border-0 bg-transparent">
+                        <button class="border-0 bg-transparent efetto">
                             <div class="img-cont">
                                 <img class="uno angolo-basso" src="../assets/img/e922f0c3-9a3d-4877-983a-56849ce92e18.webp" alt="">
                             </div>
@@ -141,7 +141,7 @@ export default {
 
     <div class="container distanza-sopra">
         <div class="row">
-            <h5>Italia , milano //da mettere la via </h5>
+            <h5>{{ apartment.address }}</h5>
 
             <p>{{ apartment.room }} camere da letto . 
                 {{ apartment.bed === 1 ? '1 letto' : apartment.bed <= 2 ? apartment.bed + ' letti' : apartment.bed + ' letti' }} 
@@ -149,30 +149,38 @@ export default {
         </div>
     </div>
 
-    <div class="container distanza-sopra " >
+    <div class="container distanza-sopra linea" >
         <div class="row col-7">
             <p>{{ apartment.description }}</p>
         </div>
     </div>
 
-    <br>
 
-    <div class="container distanza-sopra" >
+    <div class="container distanza-sopra linea" >
         <div class="row col-7">
             <h5>Dove dormirai</h5>
-            <div  class=" box-camera">
-                <img class="img-camera rounded-3" src="../assets/img/150e47d8-76b8-4233-8724-cbbd12880848.webp" alt="">
-            </div>
+                <div  class=" box-camera">
+                    <img class="img-camera rounded-3 linea" src="../assets/img/150e47d8-76b8-4233-8724-cbbd12880848.webp" alt="">
+                </div>
             
-            <p>lorem*210</p>
-            <strong>{{ apartment.room }} Camera da letto</strong>
-
-            <br>
+            <strong class="p-3">{{ apartment.room }} Camera da letto</strong>
         </div>
     </div>
 
+    <div class="container distanza-sopra linea">
+        <div class="row">
+            <p><strong>COSA TROVERAI</strong></p>
+            <div class="d-flex align-items-center" v-for="service in apartment.services">
+                <ul class="d-flex">
+                    <li><i class="fa-solid" :class="service.icon"></i>  <p class="d-inline">{{ service.name }}</p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
 
-            <TheCalendario></TheCalendario>
+
+        <TheCalendario></TheCalendario>
 
 
 
@@ -240,7 +248,9 @@ p {
     margin: 0%;
 }
 
-
+.distanza {
+    margin-right: 20px;
+}
 .col-12 {
     max-height: 510px;
     overflow: hidden;
@@ -250,6 +260,9 @@ p {
     min-height: 100%;
     object-fit:cover;
     aspect-ratio: 1/1;
+    // border-left: 6px solid white;
+    // border-top: 0%;
+    border: 4px solid white;
 }
 
 .img-cont  {
@@ -279,6 +292,7 @@ button,
     // min-height: 100%;
     height: 100%;
     width: 100%;
+    border: 4px solid white;
 }
 
 .row {
@@ -288,6 +302,7 @@ button,
 
 .distanza-sopra {
     padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 .box-camera {
@@ -305,11 +320,33 @@ button,
 }
 
 .angolo-alto {
-    border-radius: 0  15px 0 ;
+    border-radius: 0  15px 0 0  ;
 }
 
 .nero {
     color: black;
 }
+.linea {
+    border-bottom: 1px solid #ccc; 
+    margin-bottom: 15px;
+}
+
+.efetto:hover {
+    background-color: black; 
+}
+
+.efetto:hover img {
+    filter: brightness(0.9);
+}
+
+ul {
+    list-style-type: none;
+    
+}
+
+.distanza-icon {
+    margin-right: 5px;
+}
+
 </style>
 
