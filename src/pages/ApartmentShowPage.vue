@@ -33,10 +33,10 @@ export default {
 <template>
     <div class="container">
         <h1>{{ apartment.name }}</h1>
-        <p><strong>Description:</strong> {{ apartment.description }}</p>
-        <p><strong>Address:</strong> {{ apartment.address }}</p>
+        <p><strong>Descrizione:</strong> {{ apartment.description }}</p>
+        <p><strong>Indirizzo:</strong> {{ apartment.address }}</p>
         <div class="">
-            <p><strong>services:</strong></p>
+            <p><strong>Servizi:</strong></p>
 
             <div class="d-flex align-items-center" v-for="service in apartment.services">
                 <i class="">{{ service.icon }}</i>
@@ -45,8 +45,8 @@ export default {
 
         </div>
 
-        <p><strong>Rooms:</strong> {{ apartment.room }}</p>
-        <p><strong>Beds:</strong> {{ apartment.bed }}</p>
+        <p><strong>Stanze:</strong> {{ apartment.room }}</p>
+        <p><strong>Letti:</strong> {{ apartment.bed }}</p>
 
         <Contacts :apartment_id="apartment.id"></Contacts>
     </div>
