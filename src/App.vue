@@ -1,44 +1,30 @@
 <script>
 import TheHeader from "./components/TheHeader.vue";
 import TheSearchBar from "./components/TheSearchBar.vue";
+import NavBar from "./components/NavBar.vue";
+// import TomTomMaps from "./components/TomTomMaps.vue";
+import TheCalendario from "./components/TheCalendario.vue";
 import TheFooter from "./components/TheFooter.vue";
-import TomTomMaps from "./components/TomTomMaps.vue";
 
 export default {
-  components: { TheSearchBar, TheHeader, TheFooter },
+  components: { TheSearchBar, TheHeader, TheFooter, NavBar, TheCalendario },
 };
 </script>
 
 <template>
-  <!-- <header>
-    <nav class="container">
-      <img src="#" alt="LOGO" />
-      <div class="py-3 d-flex">
-        <TheSearchBar></TheSearchBar>
-        <ul class="ms-auto d-flex list-unstyled gap-3">
-          <li><router-link :to="{ name: 'home' }">Home</router-link></li>
-          <li>
-            <router-link :to="{ name: 'apartments' }">Appartamenti</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'contacts' }">Contatti</router-link>
-          </li>
-          <li>
-            <router-link :to="{ name: 'about-us' }">Su di noi</router-link>
-          </li>
-          <li><router-link :to="{ name: 'login' }">Login</router-link></li>
-        </ul>
-      </div>
-    </nav>
-  </header> -->
-  <TheHeader></TheHeader>
+  <NavBar></NavBar>
+  <!-- <TheHeader></TheHeader> -->
 
-  <RouterView></RouterView>
-  
-  <TheFooter></TheFooter>
-
+  <main class="">
+    <RouterView></RouterView>
+  </main>
+  <footer>
+    <TheFooter></TheFooter>
+  </footer>
 </template>
 
 <style lang="scss">
-
+main {
+  margin-top: 7rem;
+}
 </style>
