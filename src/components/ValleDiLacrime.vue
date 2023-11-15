@@ -7,6 +7,7 @@
         searchText: '',                       //indirizzo salvato dall'utente
         results: [],                          //risultati indirizzi
         apartments: [],                       //lista appartamenti salvati nel database
+        nearbyApartments: [],
         selectedAddress: {                    //array di oggetti che contiene i dati dell'indirizzo cliccato
           address: {},                        //vengono salvati i dati allo stesso modo di come sono salvati nell'API di TomTom
           position: {
@@ -32,6 +33,7 @@
             res.data.forEach((apartment) => {
               const distance = this.haversineDistance(this.selectedAddress.position.lat, this.selectedAddress.position.lon, apartment.latitude, apartment.longitude);
               if(distance < 20) {
+                this.nearbyApartments.push(apartment.address);
                 console.log(apartment);
               }
             })
@@ -95,17 +97,12 @@
       </ul>
 
       <div>
-        <h2>Risultato selezionato</h2>
-        <h4>{{ selectedAddress.address.freeformAddress }}</h4>
-        <p>Latitudine: {{ selectedAddress.position.lat }}</p>
-        <p>Longitudine: {{ selectedAddress.position.lon }}</p>
-      </div>
-    </div>
-  </div>
-  
-  <div class="container">
-    <div>
+        <h2>Appartamenti nelle vicinanze</h2>
 
+        <div v-for="nearbyApartment in nearbyApartments">
+          <a href=""><h4>{{ nearbyApartment }}</h4></a>
+        </div>
+      </div>
     </div>
   </div>
 </template>
