@@ -6,8 +6,14 @@
       return {
         searchText: '',                       //indirizzo salvato dall'utente
         results: [],                          //risultati indirizzi
-        apartments: [],                       //lista appartamenti salvati nel database
-        nearbyApartments: [],
+        apartments: {                         //lista appartamenti salvati nel database
+          id: '',
+          address: '',
+        },
+        nearbyApartments: {
+          id: '',
+          address: '',
+        },
         selectedAddress: {                    //array di oggetti che contiene i dati dell'indirizzo cliccato
           address: {},                        //vengono salvati i dati allo stesso modo di come sono salvati nell'API di TomTom
           position: {
