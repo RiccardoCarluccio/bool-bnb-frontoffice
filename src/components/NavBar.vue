@@ -23,7 +23,7 @@ export default {
       this.isAdvancedSearchOpen = !this.isAdvancedSearchOpen;
     },
     handleResize() {
-      this.isSmallScreen = window.innerWidth < 770;
+      this.isSmallScreen = window.innerWidth < 760;
     },
     applyFilters() {
       // Make an Axios call to fetch filtered apartments based on the searchQuery
