@@ -53,6 +53,13 @@ export default {
       // Stop the propagation of the click event to prevent closing the advanced search
       event.stopPropagation();
     },
+    handleApartmentClick(apartmentId) {
+      // Close the advanced search
+      this.isAdvancedSearchOpen = false;
+
+      // Navigate to the individual apartment page
+      this.$router.push(`/apartments/${apartmentId}`);
+    },
   },
   mounted() {
     window.addEventListener("resize", this.handleResize);
@@ -212,14 +219,35 @@ export default {
               </div>
 
               <!-- Display the filtered apartments -->
-              <ul v-if="filteredApartments.length">
-                <li v-for="apartment in filteredApartments" :key="apartment.id">
-                  {{ apartment.name }} - {{ apartment.price }}
-                </li>
-              </ul>
-              <p class="mini-p" v-if="showNoApartmentsMessage">
-                * Nessun appartamento corrisponde alla ricerca
-              </p>
+              <!-- Display the filtered apartments with images -->
+              <div v-if="filteredApartments.length" class="search-results">
+                <ul>
+                  <div
+                    v-for="apartment in filteredApartments"
+                    :key="apartment.id"
+                    @click="handleApartmentClick(apartment.id)"
+                    class="apartment-link-container"
+                  >
+                    <router-link
+                      :to="'/apartments/' + apartment.id"
+                      tag="div"
+                      class="apartment-link"
+                    >
+                      <li>
+                        <img
+                          :src="apartment.img"
+                          alt="Apartment Image"
+                          class="apartment-img"
+                        />
+                        {{ apartment.name }} - {{ apartment.price }}
+                      </li>
+                    </router-link>
+                  </div>
+                </ul>
+                <p class="mini-p" v-if="showNoApartmentsMessage">
+                  * Nessun appartamento corrisponde alla ricerca
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -433,5 +461,14 @@ img {
   &:hover {
     background-color: #d87767;
   }
+}
+
+.apartment-link {
+  text-decoration: none;
+  color: #001632;
+}
+
+ul {
+  list-style: none;
 }
 </style>
