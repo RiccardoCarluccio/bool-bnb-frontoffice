@@ -1,37 +1,38 @@
 <script>
 import axios from "axios";
 export default {
-  data() {
-    name: 'ApartmentShowPage';
+  props: {
+    apartment_id: Number,
+  },
 
-    props: {
-      apartment: {
-        type: Object
-        required: true
-      };
-    }
+  data() {
 
     return {
       formData: {
         name: "",
         email: "",
         message: "",
-        apartment_id: [],
+        apartment_id: "",
       },
       errors: null,
       succes: null
     };
   },
   methods: {
+
     onFormSubmit() {
+      this.formData.apartment_id = this.apartment_id;
+      console.log( this.formData);
       axios.post("http://127.0.0.1:8000/api/contacts", this.formData)
         .then((resp) => {
           this.succes = resp.data.message;
           this.errors = null;
+          console.log(resp.data.aparmtent_id);
         })
         .catch(e => {
           this.errors = e.response?.data.message ?? e.message;
         })
+
     },
   },
 }

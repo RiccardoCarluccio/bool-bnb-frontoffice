@@ -28,9 +28,13 @@
 
 import axios from "axios";
 import TomTomMaps from "../components/TomTomMaps.vue";
-import TheCalendario from '../components/TheCalendario.vue';
+import Contacts from "../components/Contacts.vue";
 
 export default {
+    components: {
+
+        Contacts,
+    },
     data() {
         return {
             apartment: {},
@@ -63,15 +67,13 @@ export default {
 }
 </script>
 
-
-
-<!-- <template>
+<template>
     <div class="container">
         <h1>{{ apartment.name }}</h1>
-        <p><strong>Description:</strong> {{ apartment.description }}</p>
-        <p><strong>Address:</strong> {{ apartment.address }}</p>
+        <p><strong>Descrizione:</strong> {{ apartment.description }}</p>
+        <p><strong>Indirizzo:</strong> {{ apartment.address }}</p>
         <div class="">
-            <p><strong>services:</strong></p>
+            <p><strong>Servizi:</strong></p>
 
             <div class="d-flex align-items-center" v-for="service in apartment.services">
                 <i class="">{{ service.icon }}</i>
@@ -80,22 +82,23 @@ export default {
 
         </div>
 
-        <p><strong>Rooms:</strong> {{ apartment.room }}</p>
-        <p><strong>Beds:</strong> {{ apartment.bed }}</p>
+        <p><strong>Stanze:</strong> {{ apartment.room }}</p>
+        <p><strong>Letti:</strong> {{ apartment.bed }}</p>
+
+        <Contacts :apartment_id="apartment.id"></Contacts>
     </div>
-    <TomTomMaps></TomTomMaps>
-</template> -->
+    
+    <!-- <TomTomMaps></TomTomMaps> -->
+</template>
 
 
-<template>
-
+<!-- <template>
     <div class="container">
         <div class="row">
-            
 
-            <div class="d-flex justify-content-between text-black  distanza-sopra"> 
+            <div class="d-flex justify-content-between text-black">
                 <div class="nome">
-                    <p class="fs-2">{{ apartment.name }}</p>
+
                 </div>
 
                 <div class="">
@@ -109,7 +112,8 @@ export default {
                     <!-- <div class="col-6">
                         <button class="border-0 bg-transparent efetto">
                             <div class="img-uno">
-                                <img class="rounded-start-4 due" src="../assets/img/b7c9264d-73c9-45c3-882e-6e9577d63d68.webp" alt="">
+                                <img class="rounded-start-4 due"
+                                    src="../assets/img/b7c9264d-73c9-45c3-882e-6e9577d63d68.webp" alt="">
                             </div>
                         </button>
                     </div>
@@ -210,31 +214,29 @@ export default {
                     <p class="verde"></p>
                     <p class="blu"></p>
                 </div>
-                <div  class="col-3">
-                    <p class="nero"></p>
-                    <p class="giallo"></p>
+                <div class="col-3">
+                    <p class="nero">4</p>
+                    <p class="giallo">5</p>
                 </div>
+
             </div>
         </div>
-    </div> -->
-
-
-
-
-</template>
+    </div>
+</div></template> -->
 
 <style scoped lang="scss">
 @use "../../scss/partials/mixins" as *;
 @use "../../scss/partials/variables" as *;
 
 
-// .doci {
-//     height: 100px;
-// }
-// .rosso {
-//     background-color: red;
-//     height: 100px;
-// }
+.doci {
+    height: 100px;
+}
+
+.rosso {
+    background-color: red;
+    height: 100px;
+}
 
 // .verde {
 //     background-color: forestgreen;
@@ -246,16 +248,16 @@ export default {
 //     height: 50px;
 // }
 
-// .nero {
-//     background-color: black;
-//     height:50px;
-// }
+.nero {
+    background-color: black;
+    height: 50px;
+}
 
-// .giallo {
-//     background-color: yellow;
-//     height:50px;
+.giallo {
+    background-color: yellow;
+    height: 50px;
 
-// }
+}
 
 p {
     margin: 0%;
@@ -268,6 +270,7 @@ p {
     max-height: 510px;
     overflow: hidden;
 }
+
 .uno {
     min-width: 100%;
     min-height: 100%;
@@ -278,9 +281,9 @@ p {
     border: 4px solid white;
 }
 
-.img-cont  {
-    width: 320px;
-    height:250px;
+.img-cont {
+    // max-width: 100%;
+    height: auto;
     display: block;
     max-width: 100%;
     padding: 0%;
@@ -296,8 +299,8 @@ button,
 }
 
 .img-uno {
-    height:500px;
-    // width: 560px;
+    height: 500px;
+    width: 560px;
 }
 
 .due {
@@ -310,56 +313,6 @@ button,
 
 .row {
     padding: 0%;
-    margin: 0%;
 }
-
-.distanza-sopra {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-.box-camera {
-    width: 320px;
-    height: 215px;
-}
-
-.img-camera {
-    height: 100%;
-    width: 100%;
-}
-
-.angolo-basso {
-    border-radius: 0  0 15px ;
-}
-
-.angolo-alto {
-    border-radius: 0  15px 0 0  ;
-}
-
-.nero {
-    color: black;
-}
-.linea {
-    border-bottom: 1px solid #ccc; 
-    margin-bottom: 15px;
-}
-
-.efetto:hover {
-    background-color: black; 
-}
-
-.efetto:hover img {
-    filter: brightness(0.9);
-}
-
-ul {
-    list-style-type: none;
-    
-}
-
-.distanza-icon {
-    margin-right: 5px;
-}
-
 </style>
 

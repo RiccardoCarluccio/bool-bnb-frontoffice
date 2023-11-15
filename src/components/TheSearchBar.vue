@@ -8,14 +8,33 @@ export default {
       searchQuery: "",
       showAdvancedSearchCard: false,
       searchResults: [],
+      advancedFilters: {
+        location: "",
+        distance: 0,
+        services: [],
+      },
+      availableServices: [],
     };
   },
   methods: {
-    searchApartments() {
-      // API REQUEST
+    getApartments() {
       axios
-        .get("http://127.0.0.1:8000/api/apartments", {
-          params: { query: this.searchQuery },
+        .get("http://127.0.0.1:8000/api/apartments")
+        .then((res) => {
+          this.searchResults = res.data;
+        })
+        .catch((error) => {
+          console.error("Errore durante la richiesta API:", error);
+        });
+    },
+    async searchApartments() {
+      await this.fetchServices();
+
+      const apiUrl = "http://127.0.0.1:8000/api/apartments";
+
+      axios
+        .get(apiUrl, {
+          params: { query: this.searchQuery, ...this.advancedFilters },
         })
         .then((response) => {
           this.searchResults = response.data;
@@ -24,8 +43,10 @@ export default {
           console.error(error);
         });
     },
+
     openAdvancedSearch() {
       this.showAdvancedSearchCard = true;
+      document.body.classList.add("advanced-search-open");
       document.addEventListener("click", this.closeAdvancedSearch);
     },
     closeAdvancedSearch(event) {
@@ -37,7 +58,11 @@ export default {
       ) {
         this.showAdvancedSearchCard = false;
         document.removeEventListener("click", this.closeAdvancedSearch);
+        document.body.classList.remove("advanced-search-open");
       }
+    },
+    applyFilters(filters) {
+      this.advancedFilters = { ...this.advancedFilters, ...filters };
     },
   },
   components: {
@@ -45,54 +70,72 @@ export default {
   },
 };
 </script>
-<!-- ///////////////////////////////// -->
-<!-- ///////////////////////////////// -->
-<!-- ///////////////////////////////// -->
-<template>
-  <div class="container d-flex align-items-center justify-content-center">
-    <div class="search-box">
-      <button class="btn-search" @click.prevent="searchApartments">
-        <i class="fas fa-search"></i>
-      </button>
-      <input
-        v-model="searchQuery"
-        @focus="openAdvancedSearch"
-        class="input-search"
-        type="text"
-        placeholder="Dove si va ?"
-      />
-    </div>
-  </div>
 
-  <!-- Search Results -->
-  <div class="page-content">
-    <div class="card-deck">
-      <div v-for="apartment in searchResults" :key="apartment.id" class="card">
-        <div class="card-body">
-          <h5 class="card-title">{{ apartment.name }}</h5>
+<template>
+  <div
+    class="container d-flex align-items-center flex-grow-1 justify-content-end"
+  >
+    <div
+      class="search-bar-container"
+      :class="{ 'advanced-search-open': showAdvancedSearchCard }"
+    >
+      <div class="search-box">
+        <button class="btn-search" @click.prevent="searchApartments">
+          <i class="fas fa-search"></i>
+        </button>
+        <input
+          v-model="searchQuery"
+          @focus="openAdvancedSearch"
+          class="input-search"
+          type="text"
+          placeholder="Dove si va ?"
+        />
+      </div>
+
+      <!-- Search Results -->
+      <div class="page-content">
+        <div class="card-deck">
+          <div
+            v-for="apartment in searchResults"
+            :key="apartment.id"
+            class="card"
+          >
+            <div class="card-body">
+              <h5 class="card-title">{{ apartment.name }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Search Card -->
+      <div
+        ref="advancedSearchCard"
+        class="advanced-search-card"
+        v-if="showAdvancedSearchCard"
+      >
+        <div @click.stop>
+          <AdvancedSearchCard @applyFilters="applyFilters" />
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Advanced Search Card -->
-  <div
-    ref="advancedSearchCard"
-    class="container advanced-search-card"
-    v-if="showAdvancedSearchCard"
-  >
-    <AdvancedSearchCard />
-  </div>
 </template>
 
-<style lang="scss">
-//////////////////////////////////////////
-///
-///
-///
+<style lang="scss" scoped>
+.search-box {
+  position: relative;
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+
 .advanced-search-card {
   position: fixed;
-  top: 4.5rem;
+  top: 4.6rem;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -107,12 +150,6 @@ export default {
   left: 15px;
   transform: translateY(-50%);
 }
-
-// ___________________
-// ___________________
-// ___________________
-// ___________________
-// ___________________
 
 .search-box {
   width: fit-content;
@@ -133,7 +170,7 @@ export default {
   transition: all 0.5s ease-in-out;
   background-color: #dbdbdb;
   padding-right: 40px;
-  color: #ffffff;
+  color: #d87767;
 }
 
 .input-search::placeholder {
