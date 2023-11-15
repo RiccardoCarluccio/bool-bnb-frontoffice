@@ -9,7 +9,10 @@
         apartments: [],                       //lista appartamenti salvati nel database
         selectedAddress: {                    //array di oggetti che contiene i dati dell'indirizzo cliccato
           address: {},                        //vengono salvati i dati allo stesso modo di come sono salvati nell'API di TomTom
-          position: {},
+          position: {
+            lat: undefined,
+            lon: undefined
+          },
         },
       }
     },
@@ -27,10 +30,12 @@
          });
       },
       getApartmentsWithinRadius() {
+        if(this.selectedAddress.position.lat === undefined || this.selectedAddress.position.lon === undefined) 
+          return
+
         axios.get('http://127.0.0.1:8000/api/apartments')
           .then((res) => {
             res.data.forEach((apartment) => {
-              debugger
               const distance = this.haversineDistance(this.selectedAddress.position.lat, this.selectedAddress.position.lon, apartment.latitude, apartment.longitude);
               if(distance < 20) {
                 console.log(apartment);
@@ -42,8 +47,14 @@
           })
       },
       selectAddress(result) {
-        this.searchText = result.address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
-        this.selectedAddress = result;                                        //vengono salvati nell'array del "data() return{}" i dettagli dell'indirizzo
+        if(result) {
+          this.searchText = result.address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
+          this.selectedAddress = result;                                        //vengono salvati nell'array del "data() return{}" i dettagli dell'indirizzo
+        } else {
+          this.searchText = this.results[0].address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
+          this.selectedAddress = this.results[0];
+        }
+
         this.getApartmentsWithinRadius();
       },
       haversineDistance(lat1, lon1, lat2, lon2) {
@@ -78,7 +89,7 @@
 
 <template>
   <div class="container">
-    <input class="text-center" type="text" v-model="searchText" @keyup="getAddress" @keyup.enter="getApartmentsWithinRadius" placeholder="Inserisci un indirizzo">       <!-- la ricerca avviene alla pressione di ogni tasto -->
+    <input class="text-center" type="text" v-model="searchText" @keyup="getAddress" @keyup.enter="selectAddress()" placeholder="Inserisci un indirizzo">       <!-- la ricerca avviene alla pressione di ogni tasto -->
     <button @click="getAddress" type="submit" class="btn cerca_color mx-2">Cerca</button>
 
     <div v-if="results.length > 0">
