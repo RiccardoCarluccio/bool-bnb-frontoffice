@@ -21,12 +21,6 @@
         axios.get(`https://api.tomtom.com/search/2/geocode/${this.searchText}.json?key=G3UqwADY39DYhuxHmuH49Pv68jOXjJTW`)
           .then((res) => {
             this.results = res.data.results;                                  //tutta la lista di indirizzi
-            const firstResult = res.data.results[0];                          //indirizzo più pertinente (primo della lista risultati)
-            if(firstResult) {
-              const latitude = firstResult.position.lat;                      //"latitudine" e "longitudine" vengono rese disponibili come variabili
-              const longitude = firstResult.position.lon;
-              //this.getApartmentsWithinRadius(latitude, longitude);            //viene richiamata la funzione di calcolo distanza dal punto di ricerca
-            }
          });
       },
       getApartmentsWithinRadius() {
