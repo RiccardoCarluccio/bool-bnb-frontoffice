@@ -247,7 +247,7 @@ ul.nav-underline {
 }
 
 .footer a.nav-link:hover {
-  color: #001632;
+  color: #52B363;
 }
 
 .row a {

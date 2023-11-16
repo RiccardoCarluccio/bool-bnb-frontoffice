@@ -74,7 +74,7 @@ export default {
 
 <template>
   <div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container d-flex justify-content-between align-items-center">
         <!-- Left side - LOGO as a clickable link to the home page -->
         <router-link to="/" class="navbar-brand">
@@ -86,7 +86,7 @@ export default {
           />
           <img
             v-else
-            src="\src\assets\Risorsa 8port creatt.png"
+            src="\src\assets\Risorsa 4port creatt.png"
             alt="Large Logo"
             class="large-logo"
           />
@@ -268,13 +268,13 @@ export default {
           >
             Appartamenti
           </router-link>
-          <router-link
+          <!-- <router-link
             to="/about"
             class="nav-link"
             :class="{ 'font-weight-bold': $route.path === '/about' }"
           >
             Su di noi
-          </router-link>
+          </router-link> -->
           <router-link
             to="/login"
             class="nav-link"
@@ -376,6 +376,8 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 2px 0 rgba(#001632, .2), 0 5px 10px 0 rgba(#001632, .1);
   z-index: 1000;
 }
 
@@ -417,7 +419,7 @@ img {
   right: 100%;
   top: 0;
   height: 3px;
-  background-color: #d87767;
+  background-color: #52B363;
   transition: right 0.3s ease;
 }
 
@@ -459,7 +461,7 @@ img {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #d87767;
+    background-color: #52B363;
   }
 }
 

@@ -40,115 +40,187 @@ export default {
 </script>
 
 <template>
-  <div class="gallery">
-    <div class="row d-flex justify-content-center">
-      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-8 m-2 p-2 rounded-3" v-for="apartment in apartments"
-        :key="apartment.id">
+  <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
 
-        <!-- <div :id="'carouselExampleIndicators' + apartment.id" class="carousel slide">
-          <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-              aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-              aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-              aria-label="Slide 3"></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="card-image p-0 carousel-item active" :class="{ active: index === 0 }">
-              <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 d-block img-fluid w-100 h-100"
-                style="max-height: 300px; min-height: 220px; object-fit: cover;" alt="" />
-            </div>
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="prev">
-            <span aria-hidden="true"><i class="fa-solid fa-circle-arrow-left"></i></span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-            data-bs-slide="next">
-            <span aria-hidden="true"><i class="fa-solid fa-circle-arrow-right"></i></span>
-          </button>
-        </div> -->
+    <div class="col-12  d-flex justify-content-center align-items-center ">
 
-        <div class="carousel-inner">
-          <div class="card-image p-0 carousel-item active" :class="{ active: index === 0 }">
-            <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 d-block img-fluid w-100 h-100"
-              style="max-height: 300px; min-height: 220px; object-fit: cover;" alt="" />
-          </div>
-        </div>
+      <div class="col-4 sotto-uno text-start ps-4">
+        <h1 class="fs-1">Sei pronto a partire?</h1>
+        <br>
+        <p>Benvenuto nel suo sito immobiliare personale Sig. Wayne. <br>
+          Qui potrà prenotare una delle sue prossime case vacanza. <br>
+          Abbiamo selezionato per lei una serie di proprietà in California,<br>
+          ovviamente per lei è tutto gratis.
+          <br>
+          <br>
+          Noi del team di Boolbnb le auguriamo un buon soggiorno.
+        </p>
+      </div>
 
-        <div class="card-body h-50">
-          <div class="row d-flex">
-            <h2></h2>
-            <span class="text-decoration-none"><router-link
-                :to="{ name: 'apartments.show', params: { id: apartment.id } }">{{ apartment.name }}</router-link></span>
-            <span class="text-decoration-none">{{ apartment.address }}</span>
-          </div>
-        </div>
+      <div class="d-block ps-4">
+        <img class="gift img-fluid" width="100%" src="../assets/img/ezgif.com-video-to-gif.gif" alt="">
       </div>
     </div>
-  </div>
+
+    <div class="d-flex align-items-end  avanti justify-content-center btn-avanti">
+      <button type="button" class="btn btn-dark m-5 fs-4"> <router-link to="/apartments" class="nav-link"
+          :class="{ 'font-weight-bold': $route.path === '/apartments' }">
+          Entra
+        </router-link><a href="#seconda-sezione"></a></button>
+    </div>
+  </form>
 </template>
 
 <style scoped lang="scss">
-.gallery {
-  color: #001632;
-  padding-top: 103px;
+.video-container {
+  overflow: hidden;
+  width: 100%;
 }
 
-.gallery a {
-  text-decoration: none;
-  color: #001632;
-}
-
-.carousel-inner {
-  box-shadow: 0 0 15px 0 rgba(#000, .1), 0 5px 10px 0 rgba(#000, .1);
-}
-
-// STILI CAROSELLO
-/*
-.carousel-indicators button {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  margin: 0 5px;
-  background-color: #888;
-  // Colore di sfondo dei pallini non attivi 
-}
-
-// Nascondi le frecce direzionali all'inizio 
-.carousel-control-prev,
-.carousel-control-next {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-// Mostra le frecce direzionali quando il mouse è sopra il carosello
-
-.carousel:hover .carousel-control-prev,
-.carousel:hover .carousel-control-next {
-  opacity: .8;
-}
-
-// Stile per le frecce direzionali
-
-.carousel-control-prev,
-.carousel-control-next {
-  font-size: 1rem;
-  // Regola la dimensione delle frecce
-  color: #fff;
-  // Colore delle frecce
-  background: transparent;
-  // Sfondo trasparente
-  border: none;
-  // Senza bordo
+video {
+  width: 100%;
+  height: auto;
   outline: none;
-  // Senza contorno
 }
 
-// percorsi per inserire lo stile scss nel partials
-// @use "../../scss/partials/mixins" as *;
-// @use "../../scss/partials/variables" as *; 
-*/
+.gift {
+  width: 800px;
+}
 
+video::-webkit-media-controls {
+  display: none !important;
+}
+
+video::-webkit-media-controls-panel {
+  width: calc(var(--width) + 30px) !important;
+}
+
+.sotto-uno {
+  margin-top: 200px;
+}
+
+.sotto-due {
+  margin-top: 150px;
+}
+
+.paggina {
+  height: 100vh;
+
+}
+
+// .avanti {
+//     height: 6vh;
+//     margin-bottom: 300px;
+// }
+
+// .paggina-pena {
+//     height: 100vh;
+// }
+
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+.btn-sotto {
+  margin-top: 0;
+}
+
+
+// ::-webkit-scrollbar-thumb {
+//     background-color: #888; 
+//     border-radius: 4px; 
+// }
+
+
+// ::-webkit-scrollbar-track {
+//     background-color: #f1f1f1;
+// }
+
+.form-check-input {
+  margin-right: 30px;
+}
+
+img {
+  width: 40px;
+}
+
+.file-input-container {
+  position: relative;
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.file-input-label {
+  width: 400px;
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #333;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+
+.container-dati {
+  width: 800px;
+}
+
+
+
+form {
+  color: #001632;
+}
+
+
+
+button.btn {
+  background-color: #001632;
+  margin: auto;
+}
+
+button a {
+  // background-color: transparent;
+  color: white;
+  text-decoration: none;
+
+
+}
+
+.cont-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+
+.form-check-label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.form-check-input {
+  margin-top: 10px;
+}
 </style>

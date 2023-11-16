@@ -28,7 +28,7 @@ export default {
 
 <template>
   <header style="position: fixed; z-index: 10000">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
       <div class="container d-flex justify-content-between align-items-center">
         <!-- LOGO -->
         <router-link
@@ -36,7 +36,7 @@ export default {
           :to="{ name: 'home' }"
           class="navbar-brand"
         >
-          <img src="\src\assets\Risorsa 8port creatt.png" alt="logo full" />
+          <img src="\src\assets\Risorsa 4port creatt.png" alt="logo full" />
         </router-link>
         <router-link
           v-if="isSmallScreen"
@@ -127,6 +127,7 @@ export default {
   top: 0;
   left: 0;
   width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
   z-index: 1000;
 }
 

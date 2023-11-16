@@ -93,7 +93,6 @@ export default {
 <style scoped lang="scss">
 .gallery {
   color: #001632;
-  padding-top: 103px;
 }
 
 .gallery a {

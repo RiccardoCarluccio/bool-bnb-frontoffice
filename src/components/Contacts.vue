@@ -39,7 +39,7 @@ export default {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container pb-4">
     <h1 class="text-center">Contatta il Proprietario del tuo appartamento</h1>
     <div class="alert alert-danger" v-if="errors">{{ errors }}</div>
     <form @submit.prevent="onFormSubmit" v-if="!succes">
@@ -55,13 +55,18 @@ export default {
         <label>Messaggio</label>
         <textarea class="form-control" v-model="formData.message"></textarea>
       </div>
-      <button type="submit">Invia</button>
+      <button class="btn btn-submit" type="btn btn-submit">Invia</button>
     </form>
     <div class="alert alert-success" v-else>{{ this.succes }}</div>
   </div>
 </template>
 
 <style scoped lang="scss">
-@use "../../scss/partials/mixins" as *;
-@use "../../scss/partials/variables" as *;
+
+.btn-submit {
+  background-color: #001632;
+  color: #fff;
+}
+// @use "../../scss/partials/mixins" as *;
+// @use "../../scss/partials/variables" as *;
 </style>
