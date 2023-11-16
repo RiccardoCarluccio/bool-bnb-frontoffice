@@ -9,6 +9,7 @@ import TheFooter from "./components/TheFooter.vue";
 export default {
   components:
   {
+    NavBar,
     TheSearchBar,
     TheHeader,
     TheFooter,
