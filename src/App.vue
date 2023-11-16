@@ -1,16 +1,12 @@
 <script>
 import TheHeader from "./components/TheHeader.vue";
-import TheSearchBar from "./components/TheSearchBar.vue";
 import NavBar from "./components/NavBar.vue";
-// import TomTomMaps from "./components/TomTomMaps.vue";
-import TheCalendario from "./components/TheCalendario.vue";
 import TheFooter from "./components/TheFooter.vue";
 
 export default {
   components:
   {
     NavBar,
-    TheSearchBar,
     TheHeader,
     TheFooter,
   },
@@ -19,7 +15,6 @@ export default {
 
 <template>
   <NavBar></NavBar>
-  <!-- <TheHeader></TheHeader> -->
 
   <main class="">
     <RouterView></RouterView>
