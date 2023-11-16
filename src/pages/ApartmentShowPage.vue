@@ -145,10 +145,10 @@ export default {
                         </button>
                     </div>  -->
 
-                    <div class="col-12">
+                    <div class="col-12 p-5">
                         <button class="border-0 bg-transparent efetto">
                             <div class="img-uno">
-                                <img class="rounded-start-4 due img-fluid" :src="getImgUrl(apartment)" alt="">
+                                <img class="rounded-4 due img-fluid" :src="getImgUrl(apartment)" alt="">
                             </div>
                         </button>
                     </div>
@@ -157,7 +157,7 @@ export default {
         </div>
     </div>
 
-    <div class="container distanza-sopra">
+    <div class="container distanza-sopra p-5">
         <div class="row">
             <h5>{{ apartment.address }}</h5>
 
@@ -167,14 +167,14 @@ export default {
         </div>
     </div>
 
-    <div class="container distanza-sopra linea" >
+    <div class="container distanza-sopra linea p-5" >
         <div class="row col-7">
             <p>{{ apartment.description }}</p>
         </div>
     </div>
 
 
-    <div class="container distanza-sopra linea" >
+    <!-- <div class="container distanza-sopra linea" >
         <div class="row col-7">
             <h5>Dove dormirai</h5>
                 <div  class=" box-camera">
@@ -183,9 +183,9 @@ export default {
             
             <strong class="p-3">{{ apartment.room }} Camera da letto</strong>
         </div>
-    </div>
+    </div> -->
 
-    <div class="container distanza-sopra linea">
+    <div class="container distanza-sopra linea p-5">
         <div class="row">
             <p><strong>COSA TROVERAI</strong></p>
             <div class="d-flex align-items-center" v-for="service in apartment.services">
@@ -274,13 +274,17 @@ p {
 }
 
 .uno {
-    min-width: 100%;
-    min-height: 100%;
+    // min-width: 100%;
+    // min-height: 100%;
     object-fit:cover;
     aspect-ratio: 1/1;
     // border-left: 6px solid white;
     // border-top: 0%;
-    border: 4px solid white;
+    // border: 4px solid white;
+}
+
+img {
+    width: 100%;
 }
 
 .img-cont {
@@ -300,18 +304,18 @@ button,
     margin: 0%;
 }
 
-.img-uno {
-    height: 500px;
-    width: 560px;
-}
+// .img-uno {
+//     height: 500px;
+//     width: 560px;
+// }
 
-.due {
-    // min-width: 100%;
-    // min-height: 100%;
-    height: 100%;
-    width: 100%;
-    border: 4px solid white;
-}
+// .due {
+//      min-width: 100%;
+//      min-height: 100%;
+//      height: 100%;
+//      width: 100%;
+//      border: 4px solid white;
+// }
 
 .row {
     padding: 0%;
