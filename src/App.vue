@@ -2,7 +2,6 @@
 import TheHeader from "./components/TheHeader.vue";
 import TheSearchBar from "./components/TheSearchBar.vue";
 import TheFooter from "./components/TheFooter.vue";
-import ValleDiLacrime from "./components/ValleDiLacrime.vue";
 
 export default {
   components:
@@ -10,7 +9,6 @@ export default {
     TheSearchBar,
     TheHeader,
     TheFooter,
-    ValleDiLacrime
   },
 };
 </script>
@@ -40,7 +38,6 @@ export default {
   <TheHeader></TheHeader>
 
   <RouterView></RouterView>
-  <ValleDiLacrime></ValleDiLacrime>
   
   <TheFooter></TheFooter>
 
