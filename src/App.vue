@@ -7,7 +7,12 @@ import TheCalendario from "./components/TheCalendario.vue";
 import TheFooter from "./components/TheFooter.vue";
 
 export default {
-  components: { TheSearchBar, TheHeader, TheFooter, NavBar, TheCalendario },
+  components:
+  {
+    TheSearchBar,
+    TheHeader,
+    TheFooter,
+  },
 };
 </script>
 

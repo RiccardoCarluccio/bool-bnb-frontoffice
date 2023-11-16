@@ -6,10 +6,14 @@
       return {
         searchText: '',                       //indirizzo salvato dall'utente
         results: [],                          //risultati indirizzi
-        apartments: [],                       //lista appartamenti salvati nel database
+        apartments: [],
+        nearbyApartments: [],
         selectedAddress: {                    //array di oggetti che contiene i dati dell'indirizzo cliccato
           address: {},                        //vengono salvati i dati allo stesso modo di come sono salvati nell'API di TomTom
-          position: {},
+          position: {
+            lat: undefined,
+            lon: undefined
+          },
         },
       }
     },
@@ -18,21 +22,40 @@
         axios.get(`https://api.tomtom.com/search/2/geocode/${this.searchText}.json?key=G3UqwADY39DYhuxHmuH49Pv68jOXjJTW`)
           .then((res) => {
             this.results = res.data.results;                                  //tutta la lista di indirizzi
-            const firstResult = res.data.results[0];                          //indirizzo più pertinente (primo della lista risultati)
-            if(firstResult) {
-              const latitude = firstResult.position.lat;                      //"latitudine" e "longitudine" vengono rese disponibili come variabili
-              const longitude = firstResult.position.lon;
-              this.getApartmentsWithinRadius(latitude, longitude);            //viene richiamata la funzione di calcolo distanza dal punto di ricerca
-            }
          });
       },
-      getApartmentsWithinRadius(latitude, longitude) {
-        //calcolo raggio di distanza
-        //da completare
+      getApartmentsWithinRadius() {
+        if(this.selectedAddress.position.lat === undefined || this.selectedAddress.position.lon === undefined) 
+          return
+
+        axios.get('http://127.0.0.1:8000/api/apartments')
+          .then((res) => {
+            res.data.forEach((apartment) => {
+              const distance = this.haversineDistance(this.selectedAddress.position.lat, this.selectedAddress.position.lon, apartment.latitude, apartment.longitude);
+              if(distance < 20) {
+                const nearbyApartmentData = {
+                  id: apartment.id,
+                  address: apartment.address,
+                }
+                this.nearbyApartments.push(nearbyApartmentData);
+                console.log(apartment);
+              }
+            })
+          })
+          .catch((error) => {
+            console.error('Errore durante la chiamata API:', error);
+          })
       },
       selectAddress(result) {
-        this.searchText = result.address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
-        this.selectedAddress = result;                                        //vengono salvati nell'array del "data() return{}" i dettagli dell'indirizzo
+        if(result) {
+          this.searchText = result.address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
+          this.selectedAddress = result;                                        //vengono salvati nell'array del "data() return{}" i dettagli dell'indirizzo
+        } else {
+          this.searchText = this.results[0].address.freeformAddress;                     //il searchText viene assegnato al valore dell'indirizzo cliccato
+          this.selectedAddress = this.results[0];
+        }
+
+        this.getApartmentsWithinRadius();
       },
       haversineDistance(lat1, lon1, lat2, lon2) {
         // Converte le latitudini e longitudini da gradi a radianti
@@ -51,7 +74,7 @@
       getApartments() {
         axios.get('http://127.0.0.1:8000/api/apartments')
           .then((res) => {
-            this.apartments = res.data;                                       //non funziona, nonostante in "Home.vue" sia scritto allo stesso modo
+            this.apartments = res.data;
           })
           .catch((error) => {
             console.error('Errore durante la richiesta API:', error);
@@ -66,7 +89,7 @@
 
 <template>
   <div class="container">
-    <input class="text-center" type="text" v-model="searchText" @keyup="getAddress" @keyup.enter="getApartmentsWithinRadius" placeholder="Inserisci un indirizzo">       <!-- la ricerca avviene alla pressione di ogni tasto -->
+    <input class="text-center" type="text" v-model="searchText" @keyup="getAddress" @keyup.enter="selectAddress()" placeholder="Inserisci un indirizzo">       <!-- la ricerca avviene alla pressione di ogni tasto -->
     <button @click="getAddress" type="submit" class="btn cerca_color mx-2">Cerca</button>
 
     <div v-if="results.length > 0">
@@ -78,21 +101,12 @@
       </ul>
 
       <div>
-        <h2>Risultato più pertinente</h2>
-        <h4>{{ results[0].address.freeformAddress }}</h4>
-        <p>Latitudine: {{ results[0].position.lat }}</p>
-        <p>Longitudine: {{ results[0].position.lon }}</p>
+        <h2>Appartamenti nelle vicinanze</h2>
+
+        <div v-for="nearbyApartment in nearbyApartments">
+          <a :href="/apartment/ + nearbyApartment.id"><h4>{{ nearbyApartment.address }}</h4></a>
+        </div>
       </div>
-    </div>
-
-    <div>
-      {{ apartments }}
-    </div>
-  </div>
-  
-  <div class="container">
-    <div>
-
     </div>
   </div>
 </template>
