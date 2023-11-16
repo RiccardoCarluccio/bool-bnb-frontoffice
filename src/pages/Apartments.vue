@@ -41,7 +41,7 @@ export default {
 
 <template>
   <div class="gallery">
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center p-0">
       <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-8 m-2 p-2 rounded-3" v-for="apartment in apartments"
         :key="apartment.id">
 
@@ -70,8 +70,8 @@ export default {
           </button>
         </div> -->
 
-        <div class="carousel-inner">
-          <div class="card-image p-0 carousel-item active" :class="{ active: index === 0 }">
+        <div class="carousel-inner rounded-3">
+          <div class="card-image d-block img-fluid carousel-item active" :class="{ active: index === 0 }">
             <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 d-block img-fluid w-100 h-100"
               style="max-height: 300px; min-height: 220px; object-fit: cover;" alt="" />
           </div>
@@ -98,6 +98,10 @@ export default {
 .gallery a {
   text-decoration: none;
   color: #001632;
+}
+
+.row {
+  width: 100%;
 }
 
 .carousel-inner {
