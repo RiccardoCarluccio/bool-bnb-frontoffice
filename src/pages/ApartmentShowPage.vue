@@ -204,7 +204,7 @@ export default {
 
 
 
-    <Contacts></Contacts>
+    <Contacts :apartment_id="apartment_id"></Contacts>
 
 
     <!-- <div class="container ">

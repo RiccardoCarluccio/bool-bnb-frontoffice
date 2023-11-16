@@ -1,6 +1,5 @@
 <script>
 import axios from "axios";
-import ValleDiLacrime from "./ValleDiLacrime.vue";
 
 export default {
   data() {
@@ -13,9 +12,6 @@ export default {
       checkinDate: null,
       checkoutDate: null,
     };
-  },
-  components: {
-    ValleDiLacrime,
   },
   computed: {
     showNoApartmentsMessage() {
@@ -110,7 +106,14 @@ export default {
 
         <!-- Centered search bar -->
         <div class="search-bar-container" @click="handleSearchBarClick">
-          
+          <input
+            v-model="searchQuery"
+            @click="toggleAdvancedSearch"
+            @keydown.enter.prevent="applyFiltersOnEnter"
+            type="text"
+            class="form-control"
+            placeholder="Dove si va..."
+          />
           <!-- Advanced Search Dropdown -->
           <div
             v-if="isAdvancedSearchOpen"
