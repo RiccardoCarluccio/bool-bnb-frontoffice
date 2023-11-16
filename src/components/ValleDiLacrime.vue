@@ -104,7 +104,7 @@
         <h2>Appartamenti nelle vicinanze</h2>
 
         <div v-for="nearbyApartment in nearbyApartments">
-          <a :href="/apartment/ + nearbyApartment.id"><h4>{{ nearbyApartment.address }}</h4></a>
+          <a :href="/apartments/ + nearbyApartment.id"><h4>{{ nearbyApartment.address }}</h4></a>
         </div>
       </div>
     </div>
