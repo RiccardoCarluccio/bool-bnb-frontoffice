@@ -110,7 +110,7 @@ export default {
 
         <!-- Centered search bar -->
         <div class="search-bar-container" @click="handleSearchBarClick">
-          <ValleDiLacrime></ValleDiLacrime>
+          
           <!-- Advanced Search Dropdown -->
           <div
             v-if="isAdvancedSearchOpen"
