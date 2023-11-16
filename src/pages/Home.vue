@@ -41,11 +41,11 @@ export default {
 
 <template>
   <div class="gallery">
-    <div class="row p-3 d-flex justify-content-center">
-      <div class="col-xxl-2 col-xl-3 col-lg-4 col-md-6 col-sm-12 m-2 p-2 rounded-3" v-for="apartment in apartments"
+    <div class="row d-flex justify-content-center">
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6 col-xs-8 m-2 p-2 rounded-3" v-for="apartment in apartments"
         :key="apartment.id">
 
-        <div :id="'carouselExampleIndicators' + apartment.id" class="carousel slide">
+        <!-- <div :id="'carouselExampleIndicators' + apartment.id" class="carousel slide">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
               aria-current="true" aria-label="Slide 1"></button>
@@ -68,6 +68,13 @@ export default {
             data-bs-slide="next">
             <span aria-hidden="true"><i class="fa-solid fa-circle-arrow-right"></i></span>
           </button>
+        </div> -->
+
+        <div class="carousel-inner">
+          <div class="card-image p-0 carousel-item active" :class="{ active: index === 0 }">
+            <img :src="getImgUrl(apartment)" class="card-img-top rounded-3 d-block img-fluid w-100 h-100"
+              style="max-height: 300px; min-height: 220px; object-fit: cover;" alt="" />
+          </div>
         </div>
 
         <div class="card-body h-50">
@@ -86,7 +93,7 @@ export default {
 <style scoped lang="scss">
 .gallery {
   color: #001632;
-  padding-top: 71px;
+  padding-top: 103px;
 }
 
 .gallery a {
@@ -94,44 +101,54 @@ export default {
   color: #001632;
 }
 
+.carousel-inner {
+  box-shadow: 0 0 15px 0 rgba(#000, .1), 0 5px 10px 0 rgba(#000, .1);
+}
+
+// STILI CAROSELLO
+/*
 .carousel-indicators button {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   margin: 0 5px;
   background-color: #888;
-  /* Colore di sfondo dei pallini non attivi */
+  // Colore di sfondo dei pallini non attivi 
 }
 
-/* Nascondi le frecce direzionali all'inizio */
+// Nascondi le frecce direzionali all'inizio 
 .carousel-control-prev,
 .carousel-control-next {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-/* Mostra le frecce direzionali quando il mouse è sopra il carosello */
+// Mostra le frecce direzionali quando il mouse è sopra il carosello
+
 .carousel:hover .carousel-control-prev,
 .carousel:hover .carousel-control-next {
   opacity: .8;
 }
 
-/* Stile per le frecce direzionali */
+// Stile per le frecce direzionali
+
 .carousel-control-prev,
 .carousel-control-next {
   font-size: 1rem;
-  /* Regola la dimensione delle frecce */
+  // Regola la dimensione delle frecce
   color: #fff;
-  /* Colore delle frecce */
+  // Colore delle frecce
   background: transparent;
-  /* Sfondo trasparente */
+  // Sfondo trasparente
   border: none;
-  /* Senza bordo */
+  // Senza bordo
   outline: none;
-  /* Senza contorno */
+  // Senza contorno
 }
 
+// percorsi per inserire lo stile scss nel partials
 // @use "../../scss/partials/mixins" as *;
 // @use "../../scss/partials/variables" as *; 
+*/
 
 </style>
